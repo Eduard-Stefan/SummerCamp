@@ -1,7 +1,13 @@
 package com.example.championship.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
+@AllArgsConstructor
+@Getter
+@Setter
 @Entity
 public class Player {
     @Id
@@ -13,6 +19,7 @@ public class Player {
     @JoinColumn(name = "team_id")
     private Team team;
 
+    /*
     public Player(String name, Team team) {
         this.name = name;
         this.team = team;
@@ -41,5 +48,5 @@ public class Player {
     public void setTeam(Team team) {
         this.team = team;
     }
-
+    */
 }

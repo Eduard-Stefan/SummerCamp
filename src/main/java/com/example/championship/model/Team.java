@@ -1,9 +1,15 @@
 package com.example.championship.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.List;
 
+@AllArgsConstructor
+@Getter
+@Setter
 @Entity
 public class Team {
     @Id
@@ -18,6 +24,7 @@ public class Team {
     @OneToMany(mappedBy = "team2")
     private List<Game> gamesTeam2;
 
+    /*
     public Team(String name, List<Player> players, List<Game> gamesTeam1, List<Game> gamesTeam2) {
         this.name = name;
         this.players = players;
@@ -64,4 +71,5 @@ public class Team {
     public void setGamesTeam2(List<Game> gamesTeam2) {
         this.gamesTeam2 = gamesTeam2;
     }
+    */
 }
