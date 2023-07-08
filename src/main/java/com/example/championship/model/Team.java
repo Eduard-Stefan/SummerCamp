@@ -19,6 +19,10 @@ public class Team {
     private int id;
     @Column(name = "name")
     private String name;
+    @Column(name = "location")
+    private String location;
+    @Column(name = "coach")
+    private String coach;
     @OneToMany(mappedBy = "team")
     private List<Player> players;
     @OneToMany(mappedBy = "team1")

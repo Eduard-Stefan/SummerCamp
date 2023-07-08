@@ -33,6 +33,8 @@ public class PlayerController {
         return playerService.findById(id)
                 .map(player -> {
                     player.setName(newPlayer.getName());
+                    player.setAge(newPlayer.getAge());
+                    player.setNationality(newPlayer.getNationality());
                     player.setTeam(newPlayer.getTeam());
                     return playerService.save(player);
                 })

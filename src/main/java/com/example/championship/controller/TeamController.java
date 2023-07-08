@@ -33,6 +33,8 @@ public class TeamController {
         return teamService.findById(id)
                 .map(team -> {
                     team.setName(newTeam.getName());
+                    team.setLocation(newTeam.getLocation());
+                    team.setCoach(newTeam.getCoach());
                     team.setPlayers(newTeam.getPlayers());
                     team.setGamesTeam1(newTeam.getGamesTeam1());
                     team.setGamesTeam2(newTeam.getGamesTeam2());

@@ -1,10 +1,13 @@
 package com.example.championship.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.Date;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -17,6 +20,11 @@ public class Game {
     private int id;
     @Column(name = "game_type")
     private String gameType;
+    @Column(name = "date")
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private Date date;
+    @Column(name = "location")
+    private String location;
     @Column(name = "score1")
     private int score1;
     @Column(name = "score2")

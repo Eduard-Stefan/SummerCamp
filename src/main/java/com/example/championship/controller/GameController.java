@@ -33,6 +33,8 @@ public class GameController {
         return gameService.findById(id)
                 .map(game -> {
                     game.setGameType(newGame.getGameType());
+                    game.setDate(newGame.getDate());
+                    game.setLocation(newGame.getLocation());
                     game.setScore1(newGame.getScore1());
                     game.setScore2(newGame.getScore2());
                     game.setTeam1(newGame.getTeam1());
