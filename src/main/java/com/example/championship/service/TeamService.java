@@ -25,8 +25,8 @@ public class TeamService {
         teamRepository.deleteById(id);
     }
 
-
     public Optional<Team> findById(int id) {
         return teamRepository.findById(id);
     }
+
 }

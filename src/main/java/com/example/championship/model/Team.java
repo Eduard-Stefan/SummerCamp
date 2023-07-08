@@ -26,5 +26,4 @@ public class Team {
     @OneToMany(mappedBy = "team2")
     private List<Game> gamesTeam2;
 
-
 }

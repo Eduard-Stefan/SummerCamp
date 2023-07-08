@@ -28,5 +28,4 @@ public class Game {
     @JoinColumn(name = "team2_id")
     private Team team2;
 
-
 }
