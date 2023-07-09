@@ -5,7 +5,9 @@ import com.example.championship.service.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/game")
@@ -14,12 +16,50 @@ public class GameController {
     private GameService gameService;
 
     @GetMapping(value = "/all")
-    public List<Game> getAllGames() {
-        return gameService.getAllGames();
+    public List<Game> getAllGames(
+            @RequestParam(required = false) String sortBy,
+            @RequestParam(required = false) String sortOrder,
+            @RequestParam(required = false) String filterValue) {
+
+        List<Game> games = gameService.getAllGames();
+
+        if (sortBy != null && sortOrder != null) {
+            Comparator<Game> comparator = null;
+
+            switch (sortBy.toLowerCase()) {
+                case "gametype" -> comparator = Comparator.comparing(Game::getGameType, String.CASE_INSENSITIVE_ORDER);
+                case "date" -> comparator = Comparator.comparing(Game::getDate);
+                case "location" -> comparator = Comparator.comparing(Game::getLocation, String.CASE_INSENSITIVE_ORDER);
+                case "score1" -> comparator = Comparator.comparingInt(Game::getScore1);
+                case "score2" -> comparator = Comparator.comparingInt(Game::getScore2);
+                default -> {
+                }
+            }
+
+            if (comparator != null) {
+                if (sortOrder.equalsIgnoreCase("desc")) {
+                    comparator = comparator.reversed();
+                }
+                games.sort(comparator);
+            }
+        }
+
+        if (filterValue != null) {
+            String filterValueLowerCase = filterValue.toLowerCase();
+            games = games.stream()
+                    .filter(game ->
+                            game.getGameType().toLowerCase().contains(filterValueLowerCase)
+                                    || game.getLocation().toLowerCase().contains(filterValueLowerCase)
+                                    || (game.getTeam1() != null && game.getTeam1().getName().toLowerCase().contains(filterValueLowerCase))
+                                    || (game.getTeam2() != null && game.getTeam2().getName().toLowerCase().contains(filterValueLowerCase)))
+                    .collect(Collectors.toList());
+        }
+
+        return games;
     }
 
     @PostMapping(value = "/new")
-    public Game createNewCame(@RequestBody Game newGame) {
+    public Game createNewGame(@RequestBody Game newGame) {
         return gameService.save(newGame);
     }
 
@@ -46,5 +86,4 @@ public class GameController {
                     return gameService.save(newGame);
                 });
     }
-
 }
