@@ -1,5 +1,6 @@
 package com.example.championship.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,8 +22,9 @@ public class Player {
     private Integer age;
     @Column(name = "nationality")
     private String nationality;
-    @ManyToOne
-    @JoinColumn(name = "team_id")
+    @JsonBackReference
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name = "team_id", nullable = false)
     private Team team;
 
 }

@@ -5,9 +5,7 @@ import com.example.championship.service.PlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/player")
@@ -21,31 +19,37 @@ public class PlayerController {
             @RequestParam(required = false) String sortOrder,
             @RequestParam(required = false) String filterValue) {
 
-        List<Player> players = playerService.getAllPlayers();
+        List<Player> players = null;
 
         if (sortBy != null && sortOrder != null) {
-            Comparator<Player> comparator = null;
 
             switch (sortBy.toLowerCase()) {
-                case "name" -> comparator = Comparator.comparing(Player::getName, String.CASE_INSENSITIVE_ORDER);
-                case "age" -> comparator = Comparator.comparingInt(Player::getAge);
-                case "nationality" ->
-                        comparator = Comparator.comparing(Player::getNationality, String.CASE_INSENSITIVE_ORDER);
-                case "team" ->
-                        comparator = Comparator.comparing(p -> p.getTeam().getName(), String.CASE_INSENSITIVE_ORDER);
+                case "name" -> {
+                    if (sortOrder.equalsIgnoreCase("asc"))
+                        players = playerService.sortByNameAsc();
+                    else
+                        players = playerService.sortByNameDesc();
+                }
+                case "age" -> {
+                    if (sortOrder.equalsIgnoreCase("asc"))
+                        players = playerService.sortByAgeAsc();
+                    else
+                        players = playerService.sortByAgeDesc();
+                }
+                case "nationality" -> {
+                    if (sortOrder.equalsIgnoreCase("asc"))
+                        players = playerService.sortByNationalityAsc();
+                    else
+                        players = playerService.sortByNationalityDesc();
+                }
+                //case "team" -> {}
                 default -> {
                 }
             }
+        } else
+            players = playerService.getAllPlayers();
 
-            if (comparator != null) {
-                if (sortOrder.equalsIgnoreCase("desc")) {
-                    comparator = comparator.reversed();
-                }
-                players.sort(comparator);
-            }
-        }
-
-        if (filterValue != null) {
+        /*if (filterValue != null) {
             String filterValueLowerCase = filterValue.toLowerCase();
             players = players.stream()
                     .filter(player ->
@@ -53,7 +57,7 @@ public class PlayerController {
                                     || player.getNationality().toLowerCase().contains(filterValueLowerCase)
                                     || (player.getTeam() != null && player.getTeam().getName().toLowerCase().contains(filterValueLowerCase)))
                     .collect(Collectors.toList());
-        }
+        }*/
 
         return players;
     }

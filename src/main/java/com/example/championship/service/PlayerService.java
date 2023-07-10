@@ -13,6 +13,30 @@ public class PlayerService {
     @Autowired
     private PlayerRepository playerRepository;
 
+    public List<Player> sortByNameAsc() {
+        return playerRepository.findByOrderByNameAsc();
+    }
+
+    public List<Player> sortByNameDesc() {
+        return playerRepository.findByOrderByNameDesc();
+    }
+
+    public List<Player> sortByAgeAsc() {
+        return playerRepository.findByOrderByAgeAsc();
+    }
+
+    public List<Player> sortByAgeDesc() {
+        return playerRepository.findByOrderByAgeDesc();
+    }
+
+    public List<Player> sortByNationalityAsc() {
+        return playerRepository.findByOrderByNationalityAsc();
+    }
+
+    public List<Player> sortByNationalityDesc() {
+        return playerRepository.findByOrderByNationalityDesc();
+    }
+
     public List<Player> getAllPlayers() {
         return playerRepository.findAll();
     }

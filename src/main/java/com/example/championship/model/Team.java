@@ -1,5 +1,7 @@
 package com.example.championship.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -23,11 +25,16 @@ public class Team {
     private String location;
     @Column(name = "coach")
     private String coach;
-    @OneToMany(mappedBy = "team")
+
+    @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="team")
+    @JsonIgnore
     private List<Player> players;
-    @OneToMany(mappedBy = "team1")
+
+    @JsonIgnore
+    @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="team1")
     private List<Game> gamesTeam1;
-    @OneToMany(mappedBy = "team2")
+    @JsonIgnore
+    @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="team2")
     private List<Game> gamesTeam2;
 
 }
