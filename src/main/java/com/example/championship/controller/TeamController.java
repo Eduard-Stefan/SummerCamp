@@ -5,53 +5,62 @@ import com.example.championship.service.TeamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping(value = "/team")
+@RequestMapping(value = "/teams")
 public class TeamController {
     @Autowired
     private TeamService teamService;
 
     @GetMapping(value = "/all")
-    public List<Team> getAllTeams(
-            @RequestParam(required = false) String sortBy,
-            @RequestParam(required = false) String sortOrder,
-            @RequestParam(required = false) String filterValue) {
+    public List<Team> getAllTeams() {
+        return teamService.getAllTeams();
+    }
 
-        List<Team> teams = teamService.getAllTeams();
+    @GetMapping(value = "/name/{name}")
+    public List<Team> findTeamsByName(@PathVariable(value = "name") String name) {
+        return teamService.findTeamsByName(name);
+    }
 
-        if (sortBy != null && sortOrder != null) {
-            Comparator<Team> comparator = null;
+    @GetMapping(value = "/location/{location}")
+    public List<Team> findTeamsByLocation(@PathVariable(value = "location") String location) {
+        return teamService.findTeamsByLocation(location);
+    }
 
-            switch (sortBy.toLowerCase()) {
-                case "name" -> comparator = Comparator.comparing(Team::getName, String.CASE_INSENSITIVE_ORDER);
-                case "location" -> comparator = Comparator.comparing(Team::getLocation, String.CASE_INSENSITIVE_ORDER);
-                case "coach" -> comparator = Comparator.comparing(Team::getCoach, String.CASE_INSENSITIVE_ORDER);
-                default -> {
-                }
-            }
+    @GetMapping(value = "/coach/{coach}")
+    public List<Team> findTeamsByCoach(@PathVariable(value = "coach") String coach) {
+        return teamService.findTeamsByCoach(coach);
+    }
 
-            if (comparator != null) {
-                if (sortOrder.equalsIgnoreCase("desc")) {
-                    comparator = comparator.reversed();
-                }
-                teams.sort(comparator);
-            }
-        }
+    @GetMapping(value = "/sort/name/asc")
+    public List<Team> sortTeamsByNameAsc() {
+        return teamService.sortTeamsByNameAsc();
+    }
 
-        if (filterValue != null) {
-            String filterValueLowerCase = filterValue.toLowerCase();
-            teams = teams.stream()
-                    .filter(team -> team.getName().toLowerCase().contains(filterValueLowerCase)
-                            || team.getLocation().toLowerCase().contains(filterValueLowerCase)
-                            || team.getCoach().toLowerCase().contains(filterValueLowerCase))
-                    .collect(Collectors.toList());
-        }
+    @GetMapping(value = "/sort/name/desc")
+    public List<Team> sortTeamsByNameDesc() {
+        return teamService.sortTeamsByNameDesc();
+    }
 
-        return teams;
+    @GetMapping(value = "/sort/location/asc")
+    public List<Team> sortTeamsByLocationAsc() {
+        return teamService.sortTeamsByLocationAsc();
+    }
+
+    @GetMapping(value = "/sort/location/desc")
+    public List<Team> sortTeamsByLocationDesc() {
+        return teamService.sortTeamsByLocationDesc();
+    }
+
+    @GetMapping(value = "/sort/coach/asc")
+    public List<Team> sortTeamsByCoachAsc() {
+        return teamService.sortTeamsByCoachAsc();
+    }
+
+    @GetMapping(value = "/sort/coach/desc")
+    public List<Team> sortTeamsByCoachDesc() {
+        return teamService.sortTeamsByCoachDesc();
     }
 
     @PostMapping(value = "/new")

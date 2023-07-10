@@ -8,58 +8,59 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/player")
+@RequestMapping(value = "/players")
 public class PlayerController {
     @Autowired
     private PlayerService playerService;
 
     @GetMapping(value = "/all")
-    public List<Player> getAllPlayers(
-            @RequestParam(required = false) String sortBy,
-            @RequestParam(required = false) String sortOrder,
-            @RequestParam(required = false) String filterValue) {
+    public List<Player> getAllPlayers() {
+        return playerService.getAllPlayers();
+    }
 
-        List<Player> players = null;
+    @GetMapping(value = "/name/{name}")
+    public List<Player> findPlayersByName(@PathVariable(value = "name") String name) {
+        return playerService.findPlayersByName(name);
+    }
 
-        if (sortBy != null && sortOrder != null) {
+    @GetMapping(value = "/age/{age}")
+    public List<Player> findPlayersByAge(@PathVariable(value = "age") Integer age) {
+        return playerService.findPlayersByAge(age);
+    }
 
-            switch (sortBy.toLowerCase()) {
-                case "name" -> {
-                    if (sortOrder.equalsIgnoreCase("asc"))
-                        players = playerService.sortByNameAsc();
-                    else
-                        players = playerService.sortByNameDesc();
-                }
-                case "age" -> {
-                    if (sortOrder.equalsIgnoreCase("asc"))
-                        players = playerService.sortByAgeAsc();
-                    else
-                        players = playerService.sortByAgeDesc();
-                }
-                case "nationality" -> {
-                    if (sortOrder.equalsIgnoreCase("asc"))
-                        players = playerService.sortByNationalityAsc();
-                    else
-                        players = playerService.sortByNationalityDesc();
-                }
-                //case "team" -> {}
-                default -> {
-                }
-            }
-        } else
-            players = playerService.getAllPlayers();
+    @GetMapping(value = "/nationality/{nationality}")
+    public List<Player> findPlayersByNationality(@PathVariable(value = "nationality") String nationality) {
+        return playerService.findPlayersByNationality(nationality);
+    }
 
-        /*if (filterValue != null) {
-            String filterValueLowerCase = filterValue.toLowerCase();
-            players = players.stream()
-                    .filter(player ->
-                            player.getName().toLowerCase().contains(filterValueLowerCase)
-                                    || player.getNationality().toLowerCase().contains(filterValueLowerCase)
-                                    || (player.getTeam() != null && player.getTeam().getName().toLowerCase().contains(filterValueLowerCase)))
-                    .collect(Collectors.toList());
-        }*/
+    @GetMapping(value = "/sort/name/asc")
+    public List<Player> sortPlayersByNameAsc() {
+        return playerService.sortPlayersByNameAsc();
+    }
 
-        return players;
+    @GetMapping(value = "/sort/name/desc")
+    public List<Player> sortPlayersByNameDesc() {
+        return playerService.sortPlayersByNameDesc();
+    }
+
+    @GetMapping(value = "/sort/age/asc")
+    public List<Player> sortPlayersByAgeAsc() {
+        return playerService.sortPlayersByAgeAsc();
+    }
+
+    @GetMapping(value = "/sort/age/desc")
+    public List<Player> sortPlayersByAgeDesc() {
+        return playerService.sortPlayersByAgeDesc();
+    }
+
+    @GetMapping(value = "/sort/nationality/asc")
+    public List<Player> sortPlayersByNationalityAsc() {
+        return playerService.sortPlayersByNationalityAsc();
+    }
+
+    @GetMapping(value = "/sort/nationality/desc")
+    public List<Player> sortPlayersByNationalityDesc() {
+        return playerService.sortPlayersByNationalityDesc();
     }
 
     @PostMapping(value = "/new")

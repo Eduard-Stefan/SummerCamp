@@ -5,57 +5,64 @@ import com.example.championship.service.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping(value = "/game")
+@RequestMapping(value = "/games")
 public class GameController {
     @Autowired
     private GameService gameService;
 
     @GetMapping(value = "/all")
-    public List<Game> getAllGames(
-            @RequestParam(required = false) String sortBy,
-            @RequestParam(required = false) String sortOrder,
-            @RequestParam(required = false) String filterValue) {
+    public List<Game> getAllGames() {
+        return gameService.getAllGames();
+    }
 
-        List<Game> games = gameService.getAllGames();
+    @GetMapping(value = "/gameType/{gameType}")
+    public List<Game> findGamesByGameType(@PathVariable(value = "gameType") String gameType) {
+        return gameService.findGamesByGameType(gameType);
+    }
 
-        if (sortBy != null && sortOrder != null) {
-            Comparator<Game> comparator = null;
+    @GetMapping(value = "/location/{location}")
+    public List<Game> findGamesByLocation(@PathVariable(value = "location") String location) {
+        return gameService.findGamesByLocation(location);
+    }
 
-            switch (sortBy.toLowerCase()) {
-                case "gametype" -> comparator = Comparator.comparing(Game::getGameType, String.CASE_INSENSITIVE_ORDER);
-                case "date" -> comparator = Comparator.comparing(Game::getDate);
-                case "location" -> comparator = Comparator.comparing(Game::getLocation, String.CASE_INSENSITIVE_ORDER);
-                case "score1" -> comparator = Comparator.comparingInt(Game::getScore1);
-                case "score2" -> comparator = Comparator.comparingInt(Game::getScore2);
-                default -> {
-                }
-            }
+    @GetMapping(value = "/date/{date}")
+    public List<Game> findGamesByDate(@PathVariable(value = "date") Date date) {
+        return gameService.findGamesByDate(date);
+    }
+    //I don't know what URL to use, http://localhost:8080/games/date/2023-07-13 doesn't work for example
 
-            if (comparator != null) {
-                if (sortOrder.equalsIgnoreCase("desc")) {
-                    comparator = comparator.reversed();
-                }
-                games.sort(comparator);
-            }
-        }
+    @GetMapping(value = "/sort/gameType/asc")
+    public List<Game> sortGamesByGameTypeAsc() {
+        return gameService.sortGamesByGameTypeAsc();
+    }
 
-        if (filterValue != null) {
-            String filterValueLowerCase = filterValue.toLowerCase();
-            games = games.stream()
-                    .filter(game ->
-                            game.getGameType().toLowerCase().contains(filterValueLowerCase)
-                                    || game.getLocation().toLowerCase().contains(filterValueLowerCase)
-                                    || (game.getTeam1() != null && game.getTeam1().getName().toLowerCase().contains(filterValueLowerCase))
-                                    || (game.getTeam2() != null && game.getTeam2().getName().toLowerCase().contains(filterValueLowerCase)))
-                    .collect(Collectors.toList());
-        }
+    @GetMapping(value = "/sort/gameType/desc")
+    public List<Game> sortGamesByGameTypeDesc() {
+        return gameService.sortGamesByGameTypeDesc();
+    }
 
-        return games;
+    @GetMapping(value = "/sort/location/asc")
+    public List<Game> sortGamesByLocationAsc() {
+        return gameService.sortGamesByLocationAsc();
+    }
+
+    @GetMapping(value = "/sort/location/desc")
+    public List<Game> sortGamesByLocationDesc() {
+        return gameService.sortGamesByLocationDesc();
+    }
+
+    @GetMapping(value = "/sort/date/asc")
+    public List<Game> sortGamesByDateAsc() {
+        return gameService.sortGamesByDateAsc();
+    }
+
+    @GetMapping(value = "/sort/date/desc")
+    public List<Game> sortGamesByDateDesc() {
+        return gameService.sortGamesByDateDesc();
     }
 
     @PostMapping(value = "/new")

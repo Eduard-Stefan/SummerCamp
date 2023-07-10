@@ -8,11 +8,9 @@ import java.util.List;
 
 @Repository
 public interface PlayerRepository extends JpaRepository<Player, Integer> {
-    List<Player> findByOrderByNameAsc();
-    List<Player> findByOrderByNameDesc();
-    List<Player> findByOrderByAgeAsc();
-    List<Player> findByOrderByAgeDesc();
-    List<Player> findByOrderByNationalityAsc();
-    List<Player> findByOrderByNationalityDesc();
+    List<Player> findAllByName(String name);
 
+    List<Player> findAllByAge(Integer age);
+
+    List<Player> findAllByNationality(String nationality);
 }

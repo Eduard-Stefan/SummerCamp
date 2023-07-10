@@ -23,8 +23,7 @@ public class Player {
     @Column(name = "nationality")
     private String nationality;
     @JsonBackReference
-    @ManyToOne(fetch=FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "team_id", nullable = false)
     private Team team;
-
 }
