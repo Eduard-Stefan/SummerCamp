@@ -22,8 +22,7 @@ public class Player {
     private Integer age;
     @Column(name = "nationality")
     private String nationality;
-    @JsonBackReference
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne()
     @JoinColumn(name = "team_id", nullable = false)
     private Team team;
 }
