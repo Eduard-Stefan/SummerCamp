@@ -28,8 +28,8 @@ $(document).ready(function () {
         type: "GET",
         dataType: "json",
         success: function (data) {
-            var tableContainer = $("#tableContainer");
-            makeTablePlayers(tableContainer, data);
+            var playerTable = $("#playerTable");
+            makeTablePlayers(playerTable, data);
         },
         error: function (data) {
             alert('Error: ' + data);
@@ -70,8 +70,8 @@ $(document).ready(function () {
         type: "GET",
         dataType: "json",
         success: function (data) {
-            var tableContainer = $("#tableContainer");
-            makeTableGames(tableContainer, data);
+            var gameTable = $("#gameTable");
+            makeTableGames(gameTable, data);
         },
         error: function (data) {
             alert('Error: ' + data);
@@ -104,8 +104,8 @@ $(document).ready(function () {
         type: "GET",
         dataType: "json",
         success: function (data) {
-            var tableContainer = $("#tableContainer");
-            makeTableTeams(tableContainer, data);
+            var teamTable = $("#teamTable");
+            makeTableTeams(teamTable, data);
         },
         error: function (data) {
             alert('Error: ' + data);
@@ -113,3 +113,84 @@ $(document).ready(function () {
     });
 });
 
+function addTeam() {
+  const nameInput = document.getElementById("teamname");
+  const locationInput = document.getElementById("teamlocation");
+  const coachInput = document.getElementById("teamcoach");
+  const name = nameInput.value.trim();
+  const location = locationInput.value.trim();
+  const coach = coachInput.value.trim();
+  fetch("http://localhost:8080/teams/new", {
+    method: "POST",
+    body: JSON.stringify({
+      name: name,
+      location: location,
+      coach: coach,
+    }),
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+    },
+  })
+    .then((response) => (response.json(), alert("Succesfully added to the DB!")))
+    .catch((error) => console.log("error: ", error.message));
+}
+
+function addGame() {
+  const dateInput = document.getElementById("gamedate");
+  const locationInput = document.getElementById("gamelocation");
+  const typeInput = document.getElementById("gametype");
+  const score1Input = document.getElementById("gamescore1");
+  const score2Input = document.getElementById("gamescore2");
+  const team1Input = document.getElementById("gameteam1");
+  const team2Input = document.getElementById("gameteam2");
+  const date = dateInput.value;
+  const location = locationInput.value.trim();
+  const type = typeInput.value.trim();
+  const score1 = score1Input.value.trim();
+  const score2 = score2Input.value.trim();
+  const team1 = team1Input.value.trim();
+  const team2 = team2Input.value.trim();
+
+  fetch("http://localhost:8080/games/new", {
+    method: "POST",
+    body: JSON.stringify({
+      date: date,
+      location : location,
+      gameType : type,
+      score1 : score1,
+      score2 : score2,
+      team1: {"id": team1},
+      team2: {"id": team2},
+    }),
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+    },
+  })
+    .then((response) => (response.json(), alert("Succesfully added to the DB!")))
+    .catch((error) => console.log("error: ", error.message));
+}
+
+function addPlayer() {
+  const nameInput = document.getElementById("playername");
+  const ageInput = document.getElementById("playerage");
+  const nationalityInput = document.getElementById("playernationality");
+  const teamInput = document.getElementById("playerteam");
+  const name = nameInput.value.trim();
+  const nationality = nationalityInput.value.trim();
+  const age = ageInput.value.trim();
+  const team = teamInput.value.trim();
+  fetch("http://localhost:8080/players/new", {
+    method: "POST",
+    body: JSON.stringify({
+      name: name,
+      age: age,
+      nationality: nationality,
+      team: {"id": team},
+    }),
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+    },
+  })
+    .then((response) => (response.json(), alert("Succesfully added to the DB!")))
+    .catch((error) => console.log("error: ", error.message));
+}

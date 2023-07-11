@@ -8,7 +8,37 @@
 
 <body>
 
-<div id="tableContainer"></div>
-
+<div id="teamTable"></div>
+<form id="addteam-form">
+        <div>
+        <input placeholder="Team Name" type="text" id="teamname" required/>
+        <input placeholder="Team Location" type="text" id="teamlocation" required/>
+        <input placeholder="Team Coach" type="text" id="teamcoach" required/>
+        </div>
+    <button type="button" id="addteam-button" onclick="addTeam()">Submit</button>
+</form>
+<div id="gameTable"></div>
+<form id="addgame-form">
+    <div>
+        <input type="date" id="gamedate" required/>
+        <input placeholder="Game Type" type="text" id="gametype" required/>
+        <input placeholder="Game Location" type="text" id="gamelocation" required/>
+        <input placeholder="First Score" type="text" id="gamescore1" required/>
+        <input placeholder="Second Score" type="text" id="gamescore2" required/>
+        <input placeholder="First Team" type="text" id="gameteam1" required/>
+        <input placeholder="Second Team" type="text" id="gameteam2" required/>
+    </div>
+    <button type="button" id="addgame-button" onclick="addGame()">Submit</button>
+</form>
+<div id="playerTable"></div>
+<form id="addplayer-form">
+    <div>
+        <input placeholder="Player Name" type="text" id="playername" required/>
+        <input placeholder="Age" type="text" id="playerage" required/>
+        <input placeholder="Nationality" type="text" id="playernationality" required/>
+        <input placeholder="Team" type="text" id="playerteam" required/>
+    </div>
+    <button type="button" id="addplayer-button" onclick="addPlayer()">Submit</button>
+</form>
 </body>
 </html>
