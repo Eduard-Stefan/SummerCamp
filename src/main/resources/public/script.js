@@ -131,7 +131,7 @@ function addTeam() {
       "Content-Type": "application/json; charset=UTF-8",
     },
   })
-    .then((response) => (response.json(), alert("Succesfully added to the DB!")))
+    .then((response) => (response.json(), alert("Successfully added to the DB!")))
     .catch((error) => console.log("error: ", error.message));
 }
 
@@ -166,7 +166,7 @@ function addGame() {
       "Content-Type": "application/json; charset=UTF-8",
     },
   })
-    .then((response) => (response.json(), alert("Succesfully added to the DB!")))
+    .then((response) => (response.json(), alert("Successfully added to the DB!")))
     .catch((error) => console.log("error: ", error.message));
 }
 
@@ -191,6 +191,6 @@ function addPlayer() {
       "Content-Type": "application/json; charset=UTF-8",
     },
   })
-    .then((response) => (response.json(), alert("Succesfully added to the DB!")))
+    .then((response) => (response.json(), alert("Successfully added to the DB!")))
     .catch((error) => console.log("error: ", error.message));
 }
