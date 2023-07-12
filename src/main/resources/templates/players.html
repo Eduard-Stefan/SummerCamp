@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Championship</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="players.js"></script>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+
+<body>
+<div id="playerTable"></div>
+<form id="addplayer-form">
+    <div>
+        <label for="playername">Player Name</label>
+        <input type="text" id="playername" required>
+        <label for="playerage">Age</label>
+        <input type="text" id="playerage" required>
+        <label for="playernationality">Nationality</label>
+        <input type="text" id="playernationality" required>
+        <label for="playerteam">Team</label>
+        <input type="text" id="playerteam" required>
+    </div>
+    <button type="button" id="addplayer-button" onclick="addPlayer()">Submit</button>
+</form>
+</body>
+
+</html>

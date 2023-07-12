@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Championship</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <script src="teams.js"></script>
+  <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+
+<body>
+
+<div id="teamTable"></div>
+<form id="addteam-form">
+  <div>
+    <label for="teamname">Team Name</label>
+    <input type="text" id="teamname" required>
+    <label for="teamlocation">Team Location</label>
+    <input type="text" id="teamlocation" required>
+    <label for="teamcoach">Team Coach</label>
+    <input type="text" id="teamcoach" required>
+  </div>
+  <button type="button" id="addteam-button" onclick="addTeam()">Submit</button>
+</form>
+
+</body>
+
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Championship</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="games.js"></script>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+
+<body>
+<div id="gameTable"></div>
+<form id="addgame-form">
+    <div>
+        <label for="gamedate">Game Date</label>
+        <input type="date" id="gamedate" required>
+        <label for="gametype">Game Type</label>
+        <input type="text" id="gametype" required>
+        <label for="gamelocation">Game Location</label>
+        <input type="text" id="gamelocation" required>
+        <label for="gamescore1">First Score</label>
+        <input type="text" id="gamescore1" required>
+        <label for="gamescore2">Second Score</label>
+        <input type="text" id="gamescore2" required>
+        <label for="gameteam1">First Team</label>
+        <input type="text" id="gameteam1" required>
+        <label for="gameteam2">Second Team</label>
+        <input type="text" id="gameteam2" required>
+    </div>
+    <button type="button" id="addgame-button" onclick="addGame()">Submit</button>
+</form>
+</body>
+
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>DataTable with Ajax</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+</head>
+
+<body>
+<div class="container">
+    <div class="panel">
+
+        <table id="example" class="display" cellspacing="0" width="100%">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Location</th>
+                <th>Coach</th>
+            </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+<script>
+$(document).ready(function() {
+    $('#example').DataTable({
+        "ajax": {
+            "url": "http://localhost:8080/teams/all",
+            "dataSrc": ""
+        },
+        "columns": [
+            { "data": "id" },
+            { "data": "name" },
+            { "data": "location" },
+            { "data": "coach" }
+        ]
+    });
+});
+</script>
+
+</body>
+
+</html>
