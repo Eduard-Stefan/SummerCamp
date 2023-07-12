@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Championship</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <script src="add-team.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.0/dist/lux/bootstrap.min.css">
+</head>
+
+<body>
+<div class="container">
+  <form id="addteam-form">
+    <div class="form-group mb-4">
+      <label for="teamname">Team Name</label>
+      <input type="text" class="form-control" id="teamname" required>
+    </div>
+    <div class="form-group mb-4">
+      <label for="teamlocation">Team Location</label>
+      <input type="text" class="form-control" id="teamlocation" required>
+    </div>
+    <div class="form-group mb-4">
+      <label for="teamcoach">Team Coach</label>
+      <input type="text" class="form-control" id="teamcoach" required>
+    </div>
+    <button type="button" class="btn btn-primary mb-3" id="addteam-button" onclick="addTeam()">Submit</button>
+  </form>
+  <button type="button" class="btn btn-secondary mt-3" id="redirectToTeams" onclick="redirectToTeams()">Show all teams</button>
+</div>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

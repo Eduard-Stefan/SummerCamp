@@ -1,22 +1,3 @@
-function makeTableTeams(container, data) {
-    var table = $("<table/>").addClass('teamTable');
-
-    var headerRow = $("<tr/>");
-    headerRow.append($("<th/>").text("Id"));
-    headerRow.append($("<th/>").text("Name"));
-    headerRow.append($("<th/>").text("Location"));
-    headerRow.append($("<th/>").text("Coach"));
-    table.append(headerRow);
-    $.each(data, function (rowIndex, r) {
-
-        var row = $("<tr/>");
-        $.each(r, function (colIndex, c) {
-            row.append($("<td/>").text(c));
-        });
-        table.append(row);
-    });
-    return container.append(table);
-}
 $(document).ready(function () {
     $.ajax({
         url: "http://localhost:8080/teams/all",
@@ -50,7 +31,10 @@ function addTeam() {
       "Content-Type": "application/json; charset=UTF-8",
     },
   })
-    .then((response) => (response.json(), alert("Successfully added to the DB!")))
+    .then((response) => (response.json(), alert("Team successfully added!")))
     .catch((error) => console.log("error: ", error.message));
 }
 
+function redirectToTeams() {
+    window.location.href = "teams";
+}

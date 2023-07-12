@@ -7,14 +7,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-public class TeamViewer {
+public class AddTeamViewer {
     @Autowired
     private TeamService teamService;
 
-    @GetMapping({"/teams"})
+    @GetMapping("/add-team")
     public ModelAndView teams() {
-        ModelAndView mav = new ModelAndView("teams");
-        mav.addObject("teams", teamService.getAllTeams());
+        ModelAndView mav = new ModelAndView("add-team");
+        mav.addObject("add-team", teamService.getAllTeams());
         return mav;
     }
 }

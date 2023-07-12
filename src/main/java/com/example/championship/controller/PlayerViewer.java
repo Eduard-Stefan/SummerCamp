@@ -11,7 +11,7 @@ public class PlayerViewer {
     @Autowired
     private PlayerService playerService;
 
-    @GetMapping({"/players"})
+    @GetMapping("/players")
     public ModelAndView players() {
         ModelAndView mav = new ModelAndView("players");
         mav.addObject("players", playerService.getAllPlayers());

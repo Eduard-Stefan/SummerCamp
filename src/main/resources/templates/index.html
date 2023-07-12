@@ -1,19 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+    <meta charset="UTF-8">
     <title>Championship</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <script src="util.js"></script>
-    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.0/dist/lux/bootstrap.min.css">
 </head>
 
 <body>
-<h1>Championship</h1>
+<div class="container mt-4">
+    <h1 class="mb-4">Championship</h1>
 
-<button type="button" id="redirectToGames" onclick="redirectToGames()">Go to Games</button>
-<button type="button" id="redirectToTeams" onclick="redirectToTeams()">Go to Teams</button>
-<button type="button" id="redirectToPlayers" onclick="redirectToPlayers()">Go to Players</button>
+    <button type="button" class="btn btn-primary me-2" onclick="redirectToGames()">Go to Games</button>
+    <button type="button" class="btn btn-primary me-2" onclick="redirectToTeams()">Go to Teams</button>
+    <button type="button" class="btn btn-primary" onclick="redirectToPlayers()">Go to Players</button>
+</div>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="util.js"></script>
 </body>
 
 </html>
