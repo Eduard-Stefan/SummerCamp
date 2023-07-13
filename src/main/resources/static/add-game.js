@@ -12,6 +12,7 @@ $(document).ready(function () {
         }
     });
 });
+
 function addGame() {
   const dateInput = document.getElementById("gamedate");
   const locationInput = document.getElementById("gamelocation");

@@ -20,6 +20,7 @@ function addTeam() {
   const name = nameInput.value.trim();
   const location = locationInput.value.trim();
   const coach = coachInput.value.trim();
+
   fetch("http://localhost:8080/teams/new", {
     method: "POST",
     body: JSON.stringify({

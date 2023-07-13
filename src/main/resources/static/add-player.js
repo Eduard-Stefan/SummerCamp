@@ -22,6 +22,7 @@ function addPlayer() {
   const nationality = nationalityInput.value.trim();
   const age = ageInput.value.trim();
   const team = teamInput.value.trim();
+
   fetch("http://localhost:8080/players/new", {
     method: "POST",
     body: JSON.stringify({
