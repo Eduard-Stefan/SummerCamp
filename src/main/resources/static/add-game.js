@@ -14,25 +14,46 @@ function addGame() {
   const team1 = team1Input.value.trim();
   const team2 = team2Input.value.trim();
 
+  if (
+    date === "" ||
+    location === "" ||
+    type === "" ||
+    score1 === "" ||
+    score2 === "" ||
+    team1 === "" ||
+    team2 === ""
+  ) {
+    // Display an error message or handle empty inputs
+    alert("Please fill in all fields");
+    return;
+  }
+
   fetch("http://localhost:8080/games/new", {
     method: "POST",
     body: JSON.stringify({
       date: date,
-      location : location,
-      gameType : type,
-      score1 : score1,
-      score2 : score2,
-      team1: {"id": team1},
-      team2: {"id": team2},
+      location: location,
+      gameType: type,
+      score1: score1,
+      score2: score2,
+      team1: { id: team1 },
+      team2: { id: team2 },
     }),
     headers: {
       "Content-Type": "application/json; charset=UTF-8",
     },
   })
-    .then((response) => (response.json(), alert("Game successfully added!")))
+    .then((response) => {
+      if (response.ok) {
+        alert("Game successfully added!");
+        redirectToGames();
+      } else {
+        throw new Error("Failed to add game");
+      }
+    })
     .catch((error) => console.log("error: ", error.message));
 }
 
 function redirectToGames() {
-    window.location.href = "games";
+  window.location.href = "games";
 }

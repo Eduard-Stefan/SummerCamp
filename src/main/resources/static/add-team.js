@@ -6,6 +6,12 @@ function addTeam() {
   const location = locationInput.value.trim();
   const coach = coachInput.value.trim();
 
+  if (name === "" || location === "" || coach === "") {
+    // Display an error message or handle empty inputs
+    alert("Please fill in all fields");
+    return;
+  }
+
   fetch("http://localhost:8080/teams/new", {
     method: "POST",
     body: JSON.stringify({
@@ -17,7 +23,13 @@ function addTeam() {
       "Content-Type": "application/json; charset=UTF-8",
     },
   })
-    .then((response) => (response.json(), alert("Team successfully added!")))
+    .then((response) => {
+      if (response.ok) {
+        alert("Team successfully added!");
+      } else {
+        throw new Error("Failed to add team");
+      }
+    })
     .catch((error) => console.log("error: ", error.message));
 }
 
