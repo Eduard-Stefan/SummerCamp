@@ -2,6 +2,7 @@ package com.example.championship.controller;
 
 import com.example.championship.model.Team;
 import com.example.championship.service.TeamService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -64,7 +65,7 @@ public class TeamController {
     }
 
     @PostMapping(value = "/new")
-    public Team createNewTeam(@RequestBody Team newTeam) {
+    public Team createNewTeam(@Valid @RequestBody Team newTeam) {
         return teamService.save(newTeam);
     }
 

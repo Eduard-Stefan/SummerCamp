@@ -2,6 +2,7 @@ package com.example.championship.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,10 +20,13 @@ public class Team {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Column(name = "name")
+    @NotBlank(message = "The name is required.")
     private String name;
     @Column(name = "location")
+    @NotBlank(message = "The location is required.")
     private String location;
     @Column(name = "coach")
+    @NotBlank(message = "The coach is required.")
     private String coach;
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "team")
     @JsonIgnore
