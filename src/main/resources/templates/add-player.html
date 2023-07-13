@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Championship</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <script src="add-player.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.0/dist/lux/bootstrap.min.css">
+</head>
+
+<body>
+<div class="container">
+  <form id="addplayer-form">
+    <div class="form-group mb-4">
+      <label for="playername">Player Name</label>
+      <input type="text" id="playername" required>
+    </div>
+    <div class="form-group mb-4">
+      <label for="playerage">Age</label>
+      <input type="text" id="playerage" required>
+    </div>
+    <div class="form-group mb-4">
+      <label for="playernationality">Nationality</label>
+      <input type="text" id="playernationality" required>
+    </div>
+    <div class="form-group mb-4">
+      <label for="playerteam">Team</label>
+      <input type="text" id="playerteam" required>
+    </div>
+
+  </form>
+  <div class="mt-3">
+    <button type="button" class="btn btn-primary mb-3" id="addplayer-button" onclick="addPlayer()">Submit</button>
+    <button type="button" class="btn btn-secondary mt-3" id="redirectToPlayers" onclick="redirectToPlayers()">Show players</button>
+  </div>
+</div>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

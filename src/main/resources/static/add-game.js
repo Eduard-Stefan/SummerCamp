@@ -1,30 +1,3 @@
-function makeTableGames(container, data) {
-    var table = $("<table/>").addClass('gameTable');
-
-    var headerRow = $("<tr/>");
-    headerRow.append($("<th/>").text("Id"));
-    headerRow.append($("<th/>").text("Type"));
-    headerRow.append($("<th/>").text("Location"));
-    headerRow.append($("<th/>").text("Date"));
-    headerRow.append($("<th/>").text("Score 1"));
-    headerRow.append($("<th/>").text("Score 2"));
-    headerRow.append($("<th/>").text("Team 1"));
-    headerRow.append($("<th/>").text("Team 2"));
-    table.append(headerRow);
-    $.each(data, function (rowIndex, r) {
-        var row = $("<tr/>");
-        var i=0;
-        $.each(r, function (colIndex, c) {
-            i++;
-            if(i<7)
-            row.append($("<td/>").text(c));
-            else
-                row.append($("<td/>").text(c.name));
-        });
-        table.append(row);
-    });
-    return container.append(table);
-}
 $(document).ready(function () {
     $.ajax({
         url: "http://localhost:8080/games/all",
@@ -70,6 +43,10 @@ function addGame() {
       "Content-Type": "application/json; charset=UTF-8",
     },
   })
-    .then((response) => (response.json(), alert("Successfully added to the DB!")))
+    .then((response) => (response.json(), alert("Game successfully added!")))
     .catch((error) => console.log("error: ", error.message));
+}
+
+function redirectToGames() {
+    window.location.href = "games";
 }

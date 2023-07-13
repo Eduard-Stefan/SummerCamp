@@ -1,27 +1,3 @@
-function makeTablePlayers(container, data) {
-    var table = $("<table/>").addClass('playerTable');
-
-    var headerRow = $("<tr/>");
-    headerRow.append($("<th/>").text("Id"));
-    headerRow.append($("<th/>").text("Name"));
-    headerRow.append($("<th/>").text("Age"));
-    headerRow.append($("<th/>").text("Nationality"));
-    headerRow.append($("<th/>").text("Team"));
-    table.append(headerRow);
-    $.each(data, function (rowIndex, r) {
-            var row = $("<tr/>");
-            var i=0;
-            $.each(r, function (colIndex, c) {
-                i++;
-                if(i<5)
-                    row.append($("<td/>").text(c));
-                else
-                    row.append($("<td/>").text(c.name));
-            });
-            table.append(row);
-        });
-    return container.append(table);
-}
 $(document).ready(function () {
     $.ajax({
         url: "http://localhost:8080/players/all",
@@ -36,6 +12,7 @@ $(document).ready(function () {
         }
     });
 });
+
 function addPlayer() {
   const nameInput = document.getElementById("playername");
   const ageInput = document.getElementById("playerage");
@@ -57,6 +34,10 @@ function addPlayer() {
       "Content-Type": "application/json; charset=UTF-8",
     },
   })
-    .then((response) => (response.json(), alert("Successfully added to the DB!")))
+    .then((response) => (response.json(), alert("Player successfully added!")))
     .catch((error) => console.log("error: ", error.message));
+}
+
+function redirectToPlayers() {
+    window.location.href = "players";
 }
