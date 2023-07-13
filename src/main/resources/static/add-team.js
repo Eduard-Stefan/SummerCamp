@@ -1,18 +1,3 @@
-$(document).ready(function () {
-    $.ajax({
-        url: "http://localhost:8080/teams/all",
-        type: "GET",
-        dataType: "json",
-        success: function (data) {
-            var teamTable = $("#teamTable");
-            makeTableTeams(teamTable, data);
-        },
-        error: function (data) {
-            alert('Error: ' + data);
-        }
-    });
-});
-
 function addTeam() {
   const nameInput = document.getElementById("teamname");
   const locationInput = document.getElementById("teamlocation");

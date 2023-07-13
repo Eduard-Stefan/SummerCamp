@@ -1,18 +1,3 @@
-$(document).ready(function () {
-    $.ajax({
-        url: "http://localhost:8080/players/all",
-        type: "GET",
-        dataType: "json",
-        success: function (data) {
-            var playerTable = $("#playerTable");
-            makeTablePlayers(playerTable, data);
-        },
-        error: function (data) {
-            alert('Error: ' + data);
-        }
-    });
-});
-
 function addPlayer() {
   const nameInput = document.getElementById("playername");
   const ageInput = document.getElementById("playerage");

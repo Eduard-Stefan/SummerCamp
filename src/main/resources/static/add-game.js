@@ -1,18 +1,3 @@
-$(document).ready(function () {
-    $.ajax({
-        url: "http://localhost:8080/games/all",
-        type: "GET",
-        dataType: "json",
-        success: function (data) {
-            var gameTable = $("#gameTable");
-            makeTableGames(gameTable, data);
-        },
-        error: function (data) {
-            alert('Error: ' + data);
-        }
-    });
-});
-
 function addGame() {
   const dateInput = document.getElementById("gamedate");
   const locationInput = document.getElementById("gamelocation");
