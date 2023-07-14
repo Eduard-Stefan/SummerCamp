@@ -37,4 +37,8 @@ public class Team {
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "team2")
     private List<Game> gamesTeam2;
+    @Column(name = "totalScore1")
+    private Integer totalScore1 = 0;
+    @Column(name = "totalScore2")
+    private Integer totalScore2 = 0;
 }

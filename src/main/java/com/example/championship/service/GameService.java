@@ -1,7 +1,9 @@
 package com.example.championship.service;
 
 import com.example.championship.model.Game;
+import com.example.championship.model.Team;
 import com.example.championship.repository.GameRepository;
+import com.example.championship.repository.TeamRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -12,6 +14,8 @@ import java.util.Optional;
 
 @Service
 public class GameService {
+    @Autowired
+    private TeamRepository teamRepository;
     @Autowired
     private GameRepository gameRepository;
 
@@ -56,6 +60,27 @@ public class GameService {
     }
 
     public Game save(Game newGame) {
+
+        Team dbteam1 = teamRepository.findById(newGame.getTeam1().getId()).get();
+        if (dbteam1.getTotalScore1() == null) {
+            dbteam1.setTotalScore1(newGame.getScore1());
+        }
+        else {
+            dbteam1.setTotalScore1(dbteam1.getTotalScore1()+ newGame.getScore1());
+        }
+        teamRepository.save(dbteam1);
+        newGame.setTeam1(dbteam1);
+
+        Team dbteam2 = teamRepository.findById(newGame.getTeam2().getId()).get();
+        if (dbteam2.getTotalScore2() == null) {
+            dbteam2.setTotalScore2(newGame.getScore2());
+        }
+        else {
+            dbteam2.setTotalScore2(dbteam2.getTotalScore2()+ newGame.getScore2());
+        }
+        teamRepository.save(dbteam2);
+        newGame.setTeam2(dbteam2);
+
         return gameRepository.save(newGame);
     }
 
