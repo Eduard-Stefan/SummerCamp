@@ -9,6 +9,8 @@ $(document).ready(function() {
             { "data": "name" },
             { "data": "location" },
             { "data": "coach" },
+            { "data": "totalScore1" },
+            { "data": "totalScore2" },
             {
                 "data": null,
                 "render": function(data, type, row) {
