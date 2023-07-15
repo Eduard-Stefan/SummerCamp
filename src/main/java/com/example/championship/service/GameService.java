@@ -61,25 +61,25 @@ public class GameService {
 
     public Game save(Game newGame) {
 
-        Team dbteam1 = teamRepository.findById(newGame.getTeam1().getId()).get();
-        if (dbteam1.getTotalScore1() == null) {
-            dbteam1.setTotalScore1(newGame.getScore1());
+        Team dbTeamHome = teamRepository.findById(newGame.getTeamHome().getId()).get();
+        if (dbTeamHome.getTotalScoreHome() == null) {
+            dbTeamHome.setTotalScoreHome(newGame.getScoreHome());
+        } else {
+            dbTeamHome.setTotalScoreHome(dbTeamHome.getTotalScoreHome() + newGame.getScoreHome());
         }
-        else {
-            dbteam1.setTotalScore1(dbteam1.getTotalScore1()+ newGame.getScore1());
-        }
-        teamRepository.save(dbteam1);
-        newGame.setTeam1(dbteam1);
+        dbTeamHome.setTotalScore(dbTeamHome.getTotalScoreHome() + dbTeamHome.getTotalScoreAway());
+        teamRepository.save(dbTeamHome);
+        newGame.setTeamHome(dbTeamHome);
 
-        Team dbteam2 = teamRepository.findById(newGame.getTeam2().getId()).get();
-        if (dbteam2.getTotalScore2() == null) {
-            dbteam2.setTotalScore2(newGame.getScore2());
+        Team dbTeamAway = teamRepository.findById(newGame.getTeamAway().getId()).get();
+        if (dbTeamAway.getTotalScoreAway() == null) {
+            dbTeamAway.setTotalScoreAway(newGame.getScoreAway());
+        } else {
+            dbTeamAway.setTotalScoreAway(dbTeamAway.getTotalScoreAway() + newGame.getScoreAway());
         }
-        else {
-            dbteam2.setTotalScore2(dbteam2.getTotalScore2()+ newGame.getScore2());
-        }
-        teamRepository.save(dbteam2);
-        newGame.setTeam2(dbteam2);
+        dbTeamAway.setTotalScore(dbTeamAway.getTotalScoreHome() + dbTeamAway.getTotalScoreAway());
+        teamRepository.save(dbTeamAway);
+        newGame.setTeamAway(dbTeamAway);
 
         return gameRepository.save(newGame);
     }

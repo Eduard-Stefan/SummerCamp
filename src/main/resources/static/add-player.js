@@ -1,15 +1,14 @@
 function addPlayer() {
-  const nameInput = document.getElementById("playername");
-  const ageInput = document.getElementById("playerage");
-  const nationalityInput = document.getElementById("playernationality");
-  const teamInput = document.getElementById("playerteam");
+  const nameInput = document.getElementById("name");
+  const ageInput = document.getElementById("age");
+  const nationalityInput = document.getElementById("nationality");
+  const teamInput = document.getElementById("team");
   const name = nameInput.value.trim();
-  const nationality = nationalityInput.value.trim();
   const age = ageInput.value.trim();
+  const nationality = nationalityInput.value.trim();
   const team = teamInput.value.trim();
 
   if (name === "" || age === "" || nationality === "" || team === "") {
-    // Display an error message or handle empty inputs
     alert("Please fill in all fields");
     return;
   }
@@ -29,7 +28,6 @@ function addPlayer() {
     .then((response) => {
       if (response.ok) {
         alert("Player successfully added!");
-        redirectToPlayers();
       } else {
         throw new Error("Failed to add player");
       }

@@ -1,13 +1,12 @@
 function addTeam() {
-  const nameInput = document.getElementById("teamname");
-  const locationInput = document.getElementById("teamlocation");
-  const coachInput = document.getElementById("teamcoach");
+  const nameInput = document.getElementById("name");
+  const locationInput = document.getElementById("location");
+  const coachInput = document.getElementById("coach");
   const name = nameInput.value.trim();
   const location = locationInput.value.trim();
   const coach = coachInput.value.trim();
 
   if (name === "" || location === "" || coach === "") {
-    // Display an error message or handle empty inputs
     alert("Please fill in all fields");
     return;
   }

@@ -82,10 +82,10 @@ public class GameController {
                     game.setGameType(newGame.getGameType());
                     game.setDate(newGame.getDate());
                     game.setLocation(newGame.getLocation());
-                    game.setScore1(newGame.getScore1());
-                    game.setScore2(newGame.getScore2());
-                    game.setTeam1(newGame.getTeam1());
-                    game.setTeam2(newGame.getTeam2());
+                    game.setScoreHome(newGame.getScoreHome());
+                    game.setScoreAway(newGame.getScoreAway());
+                    game.setTeamHome(newGame.getTeamHome());
+                    game.setTeamAway(newGame.getTeamAway());
                     return gameService.save(game);
                 })
                 .orElseGet(() -> {

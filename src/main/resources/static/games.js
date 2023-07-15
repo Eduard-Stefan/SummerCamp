@@ -7,11 +7,12 @@ $(document).ready(function() {
         "columns": [
             { "data": "id" },
             { "data": "gameType" },
+            { "data": "location" },
             { "data": "date" },
-            { "data": "score1" },
-            { "data": "score2" },
-            { "data": "team1.name", "render": function(data, type, row) { return data ? data : ""; } },
-            { "data": "team2.name", "render": function(data, type, row) { return data ? data : ""; } },
+            { "data": "scoreHome" },
+            { "data": "scoreAway" },
+            { "data": "teamHome.name", "render": function(data, type, row) { return data ? data : ""; } },
+            { "data": "teamAway.name", "render": function(data, type, row) { return data ? data : ""; } },
             {
                 "data": null,
                 "render": function(data, type, row) {
@@ -21,17 +22,13 @@ $(document).ready(function() {
         ]
     });
 
-    // Handle delete button click event
     $('#example').on('click', '.deleteButton', function() {
         var gameId = $(this).data('id');
         var deleteUrl = "http://localhost:8080/games/delete/" + gameId;
-
-        // Perform the delete request
         $.ajax({
             url: deleteUrl,
             type: 'DELETE',
             success: function() {
-                // Refresh the DataTable
                 dataTable.ajax.reload();
             },
             error: function() {

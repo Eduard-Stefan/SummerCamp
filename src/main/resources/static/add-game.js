@@ -1,29 +1,28 @@
 function addGame() {
-  const dateInput = document.getElementById("gamedate");
-  const locationInput = document.getElementById("gamelocation");
-  const typeInput = document.getElementById("gametype");
-  const score1Input = document.getElementById("gamescore1");
-  const score2Input = document.getElementById("gamescore2");
-  const team1Input = document.getElementById("gameteam1");
-  const team2Input = document.getElementById("gameteam2");
-  const date = dateInput.value;
-  const location = locationInput.value.trim();
+  const typeInput = document.getElementById("type");
+  const locationInput = document.getElementById("location");
+  const dateInput = document.getElementById("date");
+  const scoreHomeInput = document.getElementById("scoreHome");
+  const scoreAwayInput = document.getElementById("scoreAway");
+  const teamHomeInput = document.getElementById("teamHome");
+  const teamAwayInput = document.getElementById("teamAway");
   const type = typeInput.value.trim();
-  const score1 = score1Input.value.trim();
-  const score2 = score2Input.value.trim();
-  const team1 = team1Input.value.trim();
-  const team2 = team2Input.value.trim();
+  const location = locationInput.value.trim();
+  const date = dateInput.value;
+  const scoreHome = scoreHomeInput.value.trim();
+  const scoreAway = scoreAwayInput.value.trim();
+  const teamHome = teamHomeInput.value.trim();
+  const teamAway = teamAwayInput.value.trim();
 
   if (
-    date === "" ||
-    location === "" ||
     type === "" ||
-    score1 === "" ||
-    score2 === "" ||
-    team1 === "" ||
-    team2 === ""
+    location === "" ||
+    date === "" ||
+    scoreHome === "" ||
+    scoreAway === "" ||
+    teamHome === "" ||
+    teamAway === ""
   ) {
-    // Display an error message or handle empty inputs
     alert("Please fill in all fields");
     return;
   }
@@ -31,13 +30,13 @@ function addGame() {
   fetch("http://localhost:8080/games/new", {
     method: "POST",
     body: JSON.stringify({
-      date: date,
-      location: location,
       gameType: type,
-      score1: score1,
-      score2: score2,
-      team1: { id: team1 },
-      team2: { id: team2 },
+      location: location,
+      date: date,
+      scoreHome: scoreHome,
+      scoreAway: scoreAway,
+      teamHome: { id: teamHome },
+      teamAway: { id: teamAway },
     }),
     headers: {
       "Content-Type": "application/json; charset=UTF-8",
@@ -46,7 +45,6 @@ function addGame() {
     .then((response) => {
       if (response.ok) {
         alert("Game successfully added!");
-        redirectToGames();
       } else {
         throw new Error("Failed to add game");
       }

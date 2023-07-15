@@ -9,8 +9,9 @@ $(document).ready(function() {
             { "data": "name" },
             { "data": "location" },
             { "data": "coach" },
-            { "data": "totalScore1" },
-            { "data": "totalScore2" },
+            { "data": "totalScore" },
+            { "data": "totalScoreHome" },
+            { "data": "totalScoreAway" },
             {
                 "data": null,
                 "render": function(data, type, row) {
@@ -20,17 +21,13 @@ $(document).ready(function() {
         ]
     });
 
-    // Handle delete button click event
     $('#example').on('click', '.deleteButton', function() {
         var teamId = $(this).data('id');
         var deleteUrl = "http://localhost:8080/teams/delete/" + teamId;
-
-        // Perform the delete request
         $.ajax({
             url: deleteUrl,
             type: 'DELETE',
             success: function() {
-                // Refresh the DataTable
                 dataTable.ajax.reload();
             },
             error: function() {

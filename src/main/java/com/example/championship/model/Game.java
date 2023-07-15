@@ -25,14 +25,14 @@ public class Game {
     @Column(name = "date")
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date date;
-    @Column(name = "score1")
-    private int score1;
-    @Column(name = "score2")
-    private int score2;
+    @Column(name = "score_home")
+    private int scoreHome;
+    @Column(name = "score_away")
+    private int scoreAway;
     @ManyToOne
-    @JoinColumn(name = "team1_id")
-    private Team team1;
+    @JoinColumn(name = "team_home_id")
+    private Team teamHome;
     @ManyToOne
-    @JoinColumn(name = "team2_id")
-    private Team team2;
+    @JoinColumn(name = "team_away_id")
+    private Team teamAway;
 }

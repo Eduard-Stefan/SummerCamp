@@ -19,17 +19,13 @@ $(document).ready(function() {
         ]
     });
 
-    // Handle delete button click event
     $('#example').on('click', '.deleteButton', function() {
         var playerId = $(this).data('id');
         var deleteUrl = "http://localhost:8080/players/delete/" + playerId;
-
-        // Perform the delete request
         $.ajax({
             url: deleteUrl,
             type: 'DELETE',
             success: function() {
-                // Refresh the DataTable
                 dataTable.ajax.reload();
             },
             error: function() {

@@ -32,13 +32,15 @@ public class Team {
     @JsonIgnore
     private List<Player> players;
     @JsonIgnore
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "team1")
-    private List<Game> gamesTeam1;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "teamHome")
+    private List<Game> gamesTeamHome;
     @JsonIgnore
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "team2")
-    private List<Game> gamesTeam2;
-    @Column(name = "totalScore1")
-    private Integer totalScore1 = 0;
-    @Column(name = "totalScore2")
-    private Integer totalScore2 = 0;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "teamAway")
+    private List<Game> gamesTeamAway;
+    @Column(name = "totalScore")
+    private Integer totalScore = 0;
+    @Column(name = "totalScoreHome")
+    private Integer totalScoreHome = 0;
+    @Column(name = "totalScoreAway")
+    private Integer totalScoreAway = 0;
 }
