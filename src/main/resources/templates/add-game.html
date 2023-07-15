@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
     <title>ADD GAME</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="add-game.js"></script>
-    <link rel="stylesheet" type="text/css"
-          href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.0/dist/lux/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.0/dist/lux/bootstrap.min.css">
 </head>
 <body>
 <div class="container">
@@ -24,27 +24,30 @@
         </div>
         <div class="form-group mb-4">
             <label for="scoreHome">SCORE HOME</label>
-            <input type="text" class="form-control" id="scoreHome" required>
+            <input type="number" class="form-control" id="scoreHome" required>
         </div>
         <div class="form-group mb-4">
             <label for="scoreAway">SCORE AWAY</label>
-            <input type="text" class="form-control" id="scoreAway" required>
+            <input type="number" class="form-control" id="scoreAway" required>
         </div>
         <div class="form-group mb-4">
             <label for="teamHome">TEAM HOME</label>
-            <input type="text" class="form-control" id="teamHome" required>
+            <select class="form-control" id="teamHome" required>
+                <option value="" selected disabled>Select a team</option>
+            </select>
         </div>
         <div class="form-group mb-4">
             <label for="teamAway">TEAM AWAY</label>
-            <input type="text" class="form-control" id="teamAway" required>
+            <select class="form-control" id="teamAway" required>
+                <option value="" selected disabled>Select a team</option>
+            </select>
         </div>
     </form>
     <div class="mt-3">
-        <button type="button" class="btn btn-primary mb-3" id="addGame-button" onclick="addGame()">SUBMIT</button>
-        <button type="button" class="btn btn-primary mb-3" id="redirectToGames" onclick="redirectToGames()">SHOW GAMES
-        </button>
+        <button type="button" class="btn btn-primary mb-3" id="addGame-button">SUBMIT</button>
+        <button type="button" class="btn btn-primary mb-3" id="redirectToGames">SHOW GAMES</button>
     </div>
 </div>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.min.js"></script>
 </body>
 </html>
