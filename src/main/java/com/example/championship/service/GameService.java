@@ -85,6 +85,19 @@ public class GameService {
     }
 
     public void deleteById(int id) {
+
+        Team dbTeamHome = gameRepository.getReferenceById(id).getTeamHome();
+        dbTeamHome.setTotalScoreHome(dbTeamHome.getTotalScoreHome() - gameRepository.getReferenceById(id).getScoreHome());
+        dbTeamHome.setTotalScore(dbTeamHome.getTotalScoreHome() + dbTeamHome.getTotalScoreAway());
+        teamRepository.save(dbTeamHome);
+        gameRepository.getReferenceById(id).setTeamHome(dbTeamHome);
+
+        Team dbTeamAway = gameRepository.getReferenceById(id).getTeamAway();
+        dbTeamAway.setTotalScoreAway(dbTeamAway.getTotalScoreAway() - gameRepository.getReferenceById(id).getScoreAway());
+        dbTeamAway.setTotalScore(dbTeamAway.getTotalScoreHome() + dbTeamAway.getTotalScoreAway());
+        teamRepository.save(dbTeamAway);
+        gameRepository.getReferenceById(id).setTeamAway(dbTeamAway);
+
         gameRepository.deleteById(id);
     }
 
