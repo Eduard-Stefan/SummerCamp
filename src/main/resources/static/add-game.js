@@ -1,5 +1,4 @@
 $(document).ready(function() {
-    // Fetch teams data from the server
     $.ajax({
         url: "http://localhost:8080/teams/all",
         type: "GET",
@@ -49,12 +48,12 @@ $(document).ready(function() {
             type === "" ||
             location === "" ||
             date === "" ||
-            scoreHome === "" ||
-            scoreAway === "" ||
+            isNaN(scoreHome) || scoreHome < 0 ||
+            isNaN(scoreAway) || scoreAway < 0 ||
             teamHome === "" ||
             teamAway === ""
         ) {
-            alert("Please fill in all fields");
+            alert("Please enter valid data in all fields");
             return;
         }
 
@@ -63,20 +62,18 @@ $(document).ready(function() {
             return;
         }
 
-        const gameData = {
-            gameType: type,
-            location: location,
-            date: date,
-            scoreHome: scoreHome,
-            scoreAway: scoreAway,
-            teamHome: { id: teamHome },
-            teamAway: { id: teamAway }
-        };
-
         $.ajax({
             url: "http://localhost:8080/games/new",
             type: "POST",
-            data: JSON.stringify(gameData),
+            data: JSON.stringify({
+                gameType: type,
+                location: location,
+                date: date,
+                scoreHome: scoreHome,
+                scoreAway: scoreAway,
+                teamHome: { id: teamHome },
+                teamAway: { id: teamAway }
+            }),
             contentType: "application/json; charset=UTF-8",
             success: function(response) {
                 alert("Game successfully added!");
@@ -102,12 +99,10 @@ $(document).ready(function() {
         window.location.href = "games";
     }
 
-    // Bind click event to the submit button
     $('#addGame-button').on('click', function() {
         addGame();
     });
 
-    // Bind click event to the "SHOW GAMES" button
     $('#redirectToGames').on('click', function() {
         redirectToGames();
     });

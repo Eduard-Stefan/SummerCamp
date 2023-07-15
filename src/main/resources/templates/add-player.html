@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
     <title>ADD PLAYER</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="add-player.js"></script>
-    <link rel="stylesheet" type="text/css"
-          href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.0/dist/lux/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.0/dist/lux/bootstrap.min.css">
 </head>
 <body>
 <div class="container">
@@ -16,7 +16,7 @@
         </div>
         <div class="form-group mb-4">
             <label for="age">AGE</label>
-            <input type="text" class="form-control" id="age" required>
+            <input type="number" class="form-control" id="age" min="1" required>
         </div>
         <div class="form-group mb-4">
             <label for="nationality">NATIONALITY</label>
@@ -24,16 +24,16 @@
         </div>
         <div class="form-group mb-4">
             <label for="team">TEAM</label>
-            <input type="text" class="form-control" id="team" required>
+            <select class="form-control" id="team" required>
+                <option value="" selected disabled>Select a team</option>
+            </select>
         </div>
     </form>
     <div class="mt-3">
-        <button type="button" class="btn btn-primary mb-3" id="addPlayer-button" onclick="addPlayer()">SUBMIT</button>
-        <button type="button" class="btn btn-primary mb-3" id="redirectToPlayers" onclick="redirectToPlayers()">SHOW
-            PLAYERS
-        </button>
+        <button type="button" class="btn btn-primary mb-3" id="addPlayer-button">SUBMIT</button>
+        <button type="button" class="btn btn-primary mb-3" id="redirectToPlayers">SHOW PLAYERS</button>
     </div>
 </div>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.min.js"></script>
 </body>
 </html>
