@@ -126,46 +126,50 @@ public class GameService {
                     game.setTeamHome(newGame.getTeamHome());
                     game.setTeamAway(newGame.getTeamAway());
 
-                    if (dbTeamHome.getTotalScoreHome() == null) {
-                        dbTeamHome.setTotalScoreHome(newGame.getScoreHome());
+                    Team dbTeamHomeAux = teamRepository.findById(newGame.getTeamHome().getId()).get();
+                    if (dbTeamHomeAux.getTotalScoreHome() == null) {
+                        dbTeamHomeAux.setTotalScoreHome(newGame.getScoreHome());
                     } else {
-                        dbTeamHome.setTotalScoreHome(dbTeamHome.getTotalScoreHome() + newGame.getScoreHome());
+                        dbTeamHomeAux.setTotalScoreHome(dbTeamHomeAux.getTotalScoreHome() + newGame.getScoreHome());
                     }
-                    dbTeamHome.setTotalScore(dbTeamHome.getTotalScoreHome() + dbTeamHome.getTotalScoreAway());
-                    teamRepository.save(dbTeamHome);
-                    newGame.setTeamHome(dbTeamHome);
+                    dbTeamHomeAux.setTotalScore(dbTeamHomeAux.getTotalScoreHome() + dbTeamHomeAux.getTotalScoreAway());
+                    teamRepository.save(dbTeamHomeAux);
+                    newGame.setTeamHome(dbTeamHomeAux);
 
-                    if (dbTeamAway.getTotalScoreAway() == null) {
-                        dbTeamAway.setTotalScoreAway(newGame.getScoreAway());
+                    Team dbTeamAwayAux = teamRepository.findById(newGame.getTeamAway().getId()).get();
+                    if (dbTeamAwayAux.getTotalScoreAway() == null) {
+                        dbTeamAwayAux.setTotalScoreAway(newGame.getScoreAway());
                     } else {
-                        dbTeamAway.setTotalScoreAway(dbTeamAway.getTotalScoreAway() + newGame.getScoreAway());
+                        dbTeamAwayAux.setTotalScoreAway(dbTeamAwayAux.getTotalScoreAway() + newGame.getScoreAway());
                     }
-                    dbTeamAway.setTotalScore(dbTeamAway.getTotalScoreHome() + dbTeamAway.getTotalScoreAway());
-                    teamRepository.save(dbTeamAway);
-                    newGame.setTeamAway(dbTeamAway);
+                    dbTeamAwayAux.setTotalScore(dbTeamAwayAux.getTotalScoreHome() + dbTeamAwayAux.getTotalScoreAway());
+                    teamRepository.save(dbTeamAwayAux);
+                    newGame.setTeamAway(dbTeamAwayAux);
 
                     return gameRepository.save(game);
                 })
                 .orElseGet(() -> {
                     newGame.setId(id);
 
-                    if (dbTeamHome.getTotalScoreHome() == null) {
-                        dbTeamHome.setTotalScoreHome(newGame.getScoreHome());
+                    Team dbTeamHomeAux = teamRepository.findById(newGame.getTeamHome().getId()).get();
+                    if (dbTeamHomeAux.getTotalScoreHome() == null) {
+                        dbTeamHomeAux.setTotalScoreHome(newGame.getScoreHome());
                     } else {
-                        dbTeamHome.setTotalScoreHome(dbTeamHome.getTotalScoreHome() + newGame.getScoreHome());
+                        dbTeamHomeAux.setTotalScoreHome(dbTeamHomeAux.getTotalScoreHome() + newGame.getScoreHome());
                     }
-                    dbTeamHome.setTotalScore(dbTeamHome.getTotalScoreHome() + dbTeamHome.getTotalScoreAway());
-                    teamRepository.save(dbTeamHome);
-                    newGame.setTeamHome(dbTeamHome);
+                    dbTeamHomeAux.setTotalScore(dbTeamHomeAux.getTotalScoreHome() + dbTeamHomeAux.getTotalScoreAway());
+                    teamRepository.save(dbTeamHomeAux);
+                    newGame.setTeamHome(dbTeamHomeAux);
 
-                    if (dbTeamAway.getTotalScoreAway() == null) {
-                        dbTeamAway.setTotalScoreAway(newGame.getScoreAway());
+                    Team dbTeamAwayAux = teamRepository.findById(newGame.getTeamAway().getId()).get();
+                    if (dbTeamAwayAux.getTotalScoreAway() == null) {
+                        dbTeamAwayAux.setTotalScoreAway(newGame.getScoreAway());
                     } else {
-                        dbTeamAway.setTotalScoreAway(dbTeamAway.getTotalScoreAway() + newGame.getScoreAway());
+                        dbTeamAwayAux.setTotalScoreAway(dbTeamAwayAux.getTotalScoreAway() + newGame.getScoreAway());
                     }
-                    dbTeamAway.setTotalScore(dbTeamAway.getTotalScoreHome() + dbTeamAway.getTotalScoreAway());
-                    teamRepository.save(dbTeamAway);
-                    newGame.setTeamAway(dbTeamAway);
+                    dbTeamAwayAux.setTotalScore(dbTeamAwayAux.getTotalScoreHome() + dbTeamAwayAux.getTotalScoreAway());
+                    teamRepository.save(dbTeamAwayAux);
+                    newGame.setTeamAway(dbTeamAwayAux);
 
                     return gameRepository.save(newGame);
                 });
