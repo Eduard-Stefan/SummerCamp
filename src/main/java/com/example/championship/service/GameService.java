@@ -7,10 +7,11 @@ import com.example.championship.repository.TeamRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class GameService {
@@ -101,7 +102,72 @@ public class GameService {
         gameRepository.deleteById(id);
     }
 
-    public Optional<Game> findById(int id) {
-        return gameRepository.findById(id);
+    public Game replaceGame(@RequestBody Game newGame, @PathVariable int id) {
+
+        Team dbTeamHome = gameRepository.getReferenceById(id).getTeamHome();
+        dbTeamHome.setTotalScoreHome(dbTeamHome.getTotalScoreHome() - gameRepository.getReferenceById(id).getScoreHome());
+        dbTeamHome.setTotalScore(dbTeamHome.getTotalScoreHome() + dbTeamHome.getTotalScoreAway());
+        teamRepository.save(dbTeamHome);
+        gameRepository.getReferenceById(id).setTeamHome(dbTeamHome);
+
+        Team dbTeamAway = gameRepository.getReferenceById(id).getTeamAway();
+        dbTeamAway.setTotalScoreAway(dbTeamAway.getTotalScoreAway() - gameRepository.getReferenceById(id).getScoreAway());
+        dbTeamAway.setTotalScore(dbTeamAway.getTotalScoreHome() + dbTeamAway.getTotalScoreAway());
+        teamRepository.save(dbTeamAway);
+        gameRepository.getReferenceById(id).setTeamAway(dbTeamAway);
+
+        return gameRepository.findById(id)
+                .map(game -> {
+                    game.setGameType(newGame.getGameType());
+                    game.setDate(newGame.getDate());
+                    game.setLocation(newGame.getLocation());
+                    game.setScoreHome(newGame.getScoreHome());
+                    game.setScoreAway(newGame.getScoreAway());
+                    game.setTeamHome(newGame.getTeamHome());
+                    game.setTeamAway(newGame.getTeamAway());
+
+                    if (dbTeamHome.getTotalScoreHome() == null) {
+                        dbTeamHome.setTotalScoreHome(newGame.getScoreHome());
+                    } else {
+                        dbTeamHome.setTotalScoreHome(dbTeamHome.getTotalScoreHome() + newGame.getScoreHome());
+                    }
+                    dbTeamHome.setTotalScore(dbTeamHome.getTotalScoreHome() + dbTeamHome.getTotalScoreAway());
+                    teamRepository.save(dbTeamHome);
+                    newGame.setTeamHome(dbTeamHome);
+
+                    if (dbTeamAway.getTotalScoreAway() == null) {
+                        dbTeamAway.setTotalScoreAway(newGame.getScoreAway());
+                    } else {
+                        dbTeamAway.setTotalScoreAway(dbTeamAway.getTotalScoreAway() + newGame.getScoreAway());
+                    }
+                    dbTeamAway.setTotalScore(dbTeamAway.getTotalScoreHome() + dbTeamAway.getTotalScoreAway());
+                    teamRepository.save(dbTeamAway);
+                    newGame.setTeamAway(dbTeamAway);
+
+                    return gameRepository.save(game);
+                })
+                .orElseGet(() -> {
+                    newGame.setId(id);
+
+                    if (dbTeamHome.getTotalScoreHome() == null) {
+                        dbTeamHome.setTotalScoreHome(newGame.getScoreHome());
+                    } else {
+                        dbTeamHome.setTotalScoreHome(dbTeamHome.getTotalScoreHome() + newGame.getScoreHome());
+                    }
+                    dbTeamHome.setTotalScore(dbTeamHome.getTotalScoreHome() + dbTeamHome.getTotalScoreAway());
+                    teamRepository.save(dbTeamHome);
+                    newGame.setTeamHome(dbTeamHome);
+
+                    if (dbTeamAway.getTotalScoreAway() == null) {
+                        dbTeamAway.setTotalScoreAway(newGame.getScoreAway());
+                    } else {
+                        dbTeamAway.setTotalScoreAway(dbTeamAway.getTotalScoreAway() + newGame.getScoreAway());
+                    }
+                    dbTeamAway.setTotalScore(dbTeamAway.getTotalScoreHome() + dbTeamAway.getTotalScoreAway());
+                    teamRepository.save(dbTeamAway);
+                    newGame.setTeamAway(dbTeamAway);
+
+                    return gameRepository.save(newGame);
+                });
     }
 }

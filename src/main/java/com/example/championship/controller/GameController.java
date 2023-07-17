@@ -77,20 +77,6 @@ public class GameController {
 
     @PutMapping("/update/{id}")
     public Game replaceGame(@RequestBody Game newGame, @PathVariable int id) {
-        return gameService.findById(id)
-                .map(game -> {
-                    game.setGameType(newGame.getGameType());
-                    game.setDate(newGame.getDate());
-                    game.setLocation(newGame.getLocation());
-                    game.setScoreHome(newGame.getScoreHome());
-                    game.setScoreAway(newGame.getScoreAway());
-                    game.setTeamHome(newGame.getTeamHome());
-                    game.setTeamAway(newGame.getTeamAway());
-                    return gameService.save(game);
-                })
-                .orElseGet(() -> {
-                    newGame.setId(id);
-                    return gameService.save(newGame);
-                });
+        return gameService.replaceGame(newGame, id);
     }
 }
