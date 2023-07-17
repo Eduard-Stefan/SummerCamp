@@ -5,10 +5,8 @@
     <title>TEAMS</title>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap5.min.css">
-    <link rel="stylesheet" type="text/css"
-          href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css"
-          href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.0/dist/lux/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.0/dist/lux/bootstrap.min.css">
 </head>
 <body>
 <div class="container mt-4">
@@ -32,7 +30,7 @@
         </div>
     </div>
     <div class="mt-3">
-        <button id="addTeamButton" class="btn btn-primary">ADD TEAM</button>
+        <button id="addTeamButton" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal">ADD TEAM</button>
         <button id="homeButton" class="btn btn-primary">HOME</button>
     </div>
 </div>
@@ -63,6 +61,36 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                 <button type="button" class="btn btn-primary" id="saveChangesBtn">Save Changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addModalLabel">Add Team</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="addForm">
+                    <div class="mb-3">
+                        <label for="addName" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="addName" name="name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="addLocation" class="form-label">Location</label>
+                        <input type="text" class="form-control" id="addLocation" name="location" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="addCoach" class="form-label">Coach</label>
+                        <input type="text" class="form-control" id="addCoach" name="coach" required>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" id="saveTeamBtn">Save Team</button>
             </div>
         </div>
     </div>

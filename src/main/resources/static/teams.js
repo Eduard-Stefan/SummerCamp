@@ -82,10 +82,45 @@ $(document).ready(function() {
     });
 
     $('#addTeamButton').on('click', function() {
-        window.location.href = "add-team";
+        clearAddTeamModal();
+        $('#addModal').modal('show');
+    });
+
+    $('#saveTeamBtn').on('click', function() {
+        var addForm = $('#addForm');
+
+        if (!addForm[0].checkValidity()) {
+            addForm[0].reportValidity();
+            return;
+        }
+
+        $.ajax({
+            url: "http://localhost:8080/teams/new",
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({
+                name: $('#addName').val(),
+                location: $('#addLocation').val(),
+                coach: $('#addCoach').val()
+            }),
+            success: function() {
+                $('#addModal').modal('hide');
+                dataTable.ajax.reload();
+            },
+            error: function() {
+                alert('Error adding the team.');
+            }
+        });
     });
 
     $('#homeButton').on('click', function() {
         window.location.href = "home";
     });
+
+    function clearAddTeamModal() {
+        $('#addName').val('');
+        $('#addLocation').val('');
+        $('#addCoach').val('');
+        $('#addForm')[0].reset();
+    }
 });
