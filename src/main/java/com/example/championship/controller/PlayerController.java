@@ -2,6 +2,7 @@ package com.example.championship.controller;
 
 import com.example.championship.model.Player;
 import com.example.championship.service.PlayerService;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,7 +15,7 @@ public class PlayerController {
     private PlayerService playerService;
 
     @GetMapping(value = "/all")
-    public List<Player> getAllPlayers() {
+    public @NotNull List<Player> getAllPlayers() {
         return playerService.getAllPlayers();
     }
 
@@ -34,37 +35,37 @@ public class PlayerController {
     }
 
     @GetMapping(value = "/sort/name/asc")
-    public List<Player> sortPlayersByNameAsc() {
+    public @NotNull List<Player> sortPlayersByNameAsc() {
         return playerService.sortPlayersByNameAsc();
     }
 
     @GetMapping(value = "/sort/name/desc")
-    public List<Player> sortPlayersByNameDesc() {
+    public @NotNull List<Player> sortPlayersByNameDesc() {
         return playerService.sortPlayersByNameDesc();
     }
 
     @GetMapping(value = "/sort/age/asc")
-    public List<Player> sortPlayersByAgeAsc() {
+    public @NotNull List<Player> sortPlayersByAgeAsc() {
         return playerService.sortPlayersByAgeAsc();
     }
 
     @GetMapping(value = "/sort/age/desc")
-    public List<Player> sortPlayersByAgeDesc() {
+    public @NotNull List<Player> sortPlayersByAgeDesc() {
         return playerService.sortPlayersByAgeDesc();
     }
 
     @GetMapping(value = "/sort/nationality/asc")
-    public List<Player> sortPlayersByNationalityAsc() {
+    public @NotNull List<Player> sortPlayersByNationalityAsc() {
         return playerService.sortPlayersByNationalityAsc();
     }
 
     @GetMapping(value = "/sort/nationality/desc")
-    public List<Player> sortPlayersByNationalityDesc() {
+    public @NotNull List<Player> sortPlayersByNationalityDesc() {
         return playerService.sortPlayersByNationalityDesc();
     }
 
     @PostMapping(value = "/new")
-    public Player createNewPlayer(@RequestBody Player newPlayer) {
+    public @NotNull Player createNewPlayer(@RequestBody @NotNull Player newPlayer) {
         return playerService.save(newPlayer);
     }
 
@@ -74,7 +75,7 @@ public class PlayerController {
     }
 
     @PutMapping("/update/{id}")
-    public Player replacePlayer(@RequestBody Player newPlayer, @PathVariable int id) {
+    public @NotNull Player replacePlayer(@RequestBody @NotNull Player newPlayer, @PathVariable int id) {
         return playerService.findById(id)
                 .map(player -> {
                     player.setName(newPlayer.getName());

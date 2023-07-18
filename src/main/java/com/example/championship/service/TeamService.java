@@ -2,6 +2,7 @@ package com.example.championship.service;
 
 import com.example.championship.model.Team;
 import com.example.championship.repository.TeamRepository;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -14,7 +15,7 @@ public class TeamService {
     @Autowired
     private TeamRepository teamRepository;
 
-    public List<Team> getAllTeams() {
+    public @NotNull List<Team> getAllTeams() {
         return teamRepository.findAll();
     }
 
@@ -30,31 +31,31 @@ public class TeamService {
         return teamRepository.findAllByCoach(coach);
     }
 
-    public List<Team> sortTeamsByNameAsc() {
+    public @NotNull List<Team> sortTeamsByNameAsc() {
         return teamRepository.findAll(Sort.by(Sort.Direction.ASC, "name"));
     }
 
-    public List<Team> sortTeamsByNameDesc() {
+    public @NotNull List<Team> sortTeamsByNameDesc() {
         return teamRepository.findAll(Sort.by(Sort.Direction.DESC, "name"));
     }
 
-    public List<Team> sortTeamsByLocationAsc() {
+    public @NotNull List<Team> sortTeamsByLocationAsc() {
         return teamRepository.findAll(Sort.by(Sort.Direction.ASC, "location"));
     }
 
-    public List<Team> sortTeamsByLocationDesc() {
+    public @NotNull List<Team> sortTeamsByLocationDesc() {
         return teamRepository.findAll(Sort.by(Sort.Direction.DESC, "location"));
     }
 
-    public List<Team> sortTeamsByCoachAsc() {
+    public @NotNull List<Team> sortTeamsByCoachAsc() {
         return teamRepository.findAll(Sort.by(Sort.Direction.ASC, "coach"));
     }
 
-    public List<Team> sortTeamsByCoachDesc() {
+    public @NotNull List<Team> sortTeamsByCoachDesc() {
         return teamRepository.findAll(Sort.by(Sort.Direction.DESC, "coach"));
     }
 
-    public Team save(Team newTeam) {
+    public @NotNull Team save(@NotNull Team newTeam) {
         return teamRepository.save(newTeam);
     }
 
@@ -62,7 +63,7 @@ public class TeamService {
         teamRepository.deleteById(id);
     }
 
-    public Optional<Team> findById(int id) {
+    public @NotNull Optional<Team> findById(int id) {
         return teamRepository.findById(id);
     }
 }

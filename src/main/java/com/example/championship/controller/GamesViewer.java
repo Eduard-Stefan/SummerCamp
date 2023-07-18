@@ -1,6 +1,7 @@
 package com.example.championship.controller;
 
 import com.example.championship.service.GameService;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,8 +13,8 @@ public class GamesViewer {
     private GameService gameService;
 
     @GetMapping("/games")
-    public ModelAndView games() {
-        ModelAndView mav = new ModelAndView("games");
+    public @NotNull ModelAndView games() {
+        @NotNull ModelAndView mav = new ModelAndView("games");
         mav.addObject("games", gameService.getAllGames());
         return mav;
     }

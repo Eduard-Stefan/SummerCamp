@@ -2,6 +2,7 @@ package com.example.championship.service;
 
 import com.example.championship.model.Player;
 import com.example.championship.repository.PlayerRepository;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -14,7 +15,7 @@ public class PlayerService {
     @Autowired
     private PlayerRepository playerRepository;
 
-    public List<Player> getAllPlayers() {
+    public @NotNull List<Player> getAllPlayers() {
         return playerRepository.findAll();
     }
 
@@ -30,31 +31,31 @@ public class PlayerService {
         return playerRepository.findAllByNationality(nationality);
     }
 
-    public List<Player> sortPlayersByNameAsc() {
+    public @NotNull List<Player> sortPlayersByNameAsc() {
         return playerRepository.findAll(Sort.by(Sort.Direction.ASC, "name"));
     }
 
-    public List<Player> sortPlayersByNameDesc() {
+    public @NotNull List<Player> sortPlayersByNameDesc() {
         return playerRepository.findAll(Sort.by(Sort.Direction.DESC, "name"));
     }
 
-    public List<Player> sortPlayersByAgeAsc() {
+    public @NotNull List<Player> sortPlayersByAgeAsc() {
         return playerRepository.findAll(Sort.by(Sort.Direction.ASC, "age"));
     }
 
-    public List<Player> sortPlayersByAgeDesc() {
+    public @NotNull List<Player> sortPlayersByAgeDesc() {
         return playerRepository.findAll(Sort.by(Sort.Direction.DESC, "age"));
     }
 
-    public List<Player> sortPlayersByNationalityAsc() {
+    public @NotNull List<Player> sortPlayersByNationalityAsc() {
         return playerRepository.findAll(Sort.by(Sort.Direction.ASC, "nationality"));
     }
 
-    public List<Player> sortPlayersByNationalityDesc() {
+    public @NotNull List<Player> sortPlayersByNationalityDesc() {
         return playerRepository.findAll(Sort.by(Sort.Direction.DESC, "nationality"));
     }
 
-    public Player save(Player newPlayer) {
+    public @NotNull Player save(@NotNull Player newPlayer) {
         return playerRepository.save(newPlayer);
     }
 
@@ -62,7 +63,7 @@ public class PlayerService {
         playerRepository.deleteById(id);
     }
 
-    public Optional<Player> findById(int id) {
+    public @NotNull Optional<Player> findById(int id) {
         return playerRepository.findById(id);
     }
 }

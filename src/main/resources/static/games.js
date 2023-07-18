@@ -225,5 +225,4 @@ $(document).ready(function() {
     $('#homeButton').on('click', function() {
         window.location.href = "home";
     });
-
 });

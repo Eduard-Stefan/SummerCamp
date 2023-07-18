@@ -1,5 +1,6 @@
 package com.example.championship.exceptions;
 
+import org.jetbrains.annotations.NotNull;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -20,15 +21,15 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseBody
-    public ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, WebRequest request) {
-        BindingResult bindingResult = ex.getBindingResult();
-        List<String> errors = new ArrayList<>();
+    public @NotNull ResponseEntity<Object> handleMethodArgumentNotValid(@NotNull MethodArgumentNotValidException ex, WebRequest request) {
+        @NotNull BindingResult bindingResult = ex.getBindingResult();
+        @NotNull List<String> errors = new ArrayList<>();
 
-        for (FieldError fieldError : bindingResult.getFieldErrors()) {
+        for (@NotNull FieldError fieldError : bindingResult.getFieldErrors()) {
             errors.add(fieldError.getDefaultMessage());
         }
 
-        Map<String, List<String>> body = new HashMap<>();
+        @NotNull Map<String, List<String>> body = new HashMap<>();
         body.put("errors", errors);
 
         return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);

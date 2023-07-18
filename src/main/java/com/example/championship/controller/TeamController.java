@@ -3,6 +3,7 @@ package com.example.championship.controller;
 import com.example.championship.model.Team;
 import com.example.championship.service.TeamService;
 import jakarta.validation.Valid;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,7 +16,7 @@ public class TeamController {
     private TeamService teamService;
 
     @GetMapping(value = "/all")
-    public List<Team> getAllTeams() {
+    public @NotNull List<Team> getAllTeams() {
         return teamService.getAllTeams();
     }
 
@@ -35,37 +36,37 @@ public class TeamController {
     }
 
     @GetMapping(value = "/sort/name/asc")
-    public List<Team> sortTeamsByNameAsc() {
+    public @NotNull List<Team> sortTeamsByNameAsc() {
         return teamService.sortTeamsByNameAsc();
     }
 
     @GetMapping(value = "/sort/name/desc")
-    public List<Team> sortTeamsByNameDesc() {
+    public @NotNull List<Team> sortTeamsByNameDesc() {
         return teamService.sortTeamsByNameDesc();
     }
 
     @GetMapping(value = "/sort/location/asc")
-    public List<Team> sortTeamsByLocationAsc() {
+    public @NotNull List<Team> sortTeamsByLocationAsc() {
         return teamService.sortTeamsByLocationAsc();
     }
 
     @GetMapping(value = "/sort/location/desc")
-    public List<Team> sortTeamsByLocationDesc() {
+    public @NotNull List<Team> sortTeamsByLocationDesc() {
         return teamService.sortTeamsByLocationDesc();
     }
 
     @GetMapping(value = "/sort/coach/asc")
-    public List<Team> sortTeamsByCoachAsc() {
+    public @NotNull List<Team> sortTeamsByCoachAsc() {
         return teamService.sortTeamsByCoachAsc();
     }
 
     @GetMapping(value = "/sort/coach/desc")
-    public List<Team> sortTeamsByCoachDesc() {
+    public @NotNull List<Team> sortTeamsByCoachDesc() {
         return teamService.sortTeamsByCoachDesc();
     }
 
     @PostMapping(value = "/new")
-    public Team createNewTeam(@Valid @RequestBody Team newTeam) {
+    public @NotNull Team createNewTeam(@Valid @RequestBody @NotNull Team newTeam) {
         return teamService.save(newTeam);
     }
 
@@ -75,7 +76,7 @@ public class TeamController {
     }
 
     @PutMapping("/update/{id}")
-    public Team replaceTeam(@RequestBody Team newTeam, @PathVariable int id) {
+    public @NotNull Team replaceTeam(@RequestBody @NotNull Team newTeam, @PathVariable int id) {
         return teamService.findById(id)
                 .map(team -> {
                     team.setName(newTeam.getName());

@@ -4,6 +4,7 @@ import com.example.championship.model.Game;
 import com.example.championship.model.Team;
 import com.example.championship.repository.GameRepository;
 import com.example.championship.repository.TeamRepository;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -20,7 +21,7 @@ public class GameService {
     @Autowired
     private GameRepository gameRepository;
 
-    public List<Game> getAllGames() {
+    public @NotNull List<Game> getAllGames() {
         return gameRepository.findAll();
     }
 
@@ -36,33 +37,33 @@ public class GameService {
         return gameRepository.findAllByDate(date);
     }
 
-    public List<Game> sortGamesByGameTypeAsc() {
+    public @NotNull List<Game> sortGamesByGameTypeAsc() {
         return gameRepository.findAll(Sort.by(Sort.Direction.ASC, "gameType"));
     }
 
-    public List<Game> sortGamesByGameTypeDesc() {
+    public @NotNull List<Game> sortGamesByGameTypeDesc() {
         return gameRepository.findAll(Sort.by(Sort.Direction.DESC, "gameType"));
     }
 
-    public List<Game> sortGamesByLocationAsc() {
+    public @NotNull List<Game> sortGamesByLocationAsc() {
         return gameRepository.findAll(Sort.by(Sort.Direction.ASC, "location"));
     }
 
-    public List<Game> sortGamesByLocationDesc() {
+    public @NotNull List<Game> sortGamesByLocationDesc() {
         return gameRepository.findAll(Sort.by(Sort.Direction.DESC, "location"));
     }
 
-    public List<Game> sortGamesByDateAsc() {
+    public @NotNull List<Game> sortGamesByDateAsc() {
         return gameRepository.findAll(Sort.by(Sort.Direction.ASC, "date"));
     }
 
-    public List<Game> sortGamesByDateDesc() {
+    public @NotNull List<Game> sortGamesByDateDesc() {
         return gameRepository.findAll(Sort.by(Sort.Direction.DESC, "date"));
     }
 
-    public Game save(Game newGame) {
+    public @NotNull Game save(@NotNull Game newGame) {
 
-        Team dbTeamHome = teamRepository.findById(newGame.getTeamHome().getId()).get();
+        @NotNull Team dbTeamHome = teamRepository.findById(newGame.getTeamHome().getId()).get();
         if (dbTeamHome.getTotalScoreHome() == null) {
             dbTeamHome.setTotalScoreHome(newGame.getScoreHome());
         } else {
@@ -72,7 +73,7 @@ public class GameService {
         teamRepository.save(dbTeamHome);
         newGame.setTeamHome(dbTeamHome);
 
-        Team dbTeamAway = teamRepository.findById(newGame.getTeamAway().getId()).get();
+        @NotNull Team dbTeamAway = teamRepository.findById(newGame.getTeamAway().getId()).get();
         if (dbTeamAway.getTotalScoreAway() == null) {
             dbTeamAway.setTotalScoreAway(newGame.getScoreAway());
         } else {
@@ -102,7 +103,7 @@ public class GameService {
         gameRepository.deleteById(id);
     }
 
-    public Game replaceGame(@RequestBody Game newGame, @PathVariable int id) {
+    public @NotNull Game replaceGame(@RequestBody @NotNull Game newGame, @PathVariable int id) {
 
         Team dbTeamHome = gameRepository.getReferenceById(id).getTeamHome();
         dbTeamHome.setTotalScoreHome(dbTeamHome.getTotalScoreHome() - gameRepository.getReferenceById(id).getScoreHome());
@@ -126,7 +127,7 @@ public class GameService {
                     game.setTeamHome(newGame.getTeamHome());
                     game.setTeamAway(newGame.getTeamAway());
 
-                    Team dbTeamHomeAux = teamRepository.findById(newGame.getTeamHome().getId()).get();
+                    @NotNull Team dbTeamHomeAux = teamRepository.findById(newGame.getTeamHome().getId()).get();
                     if (dbTeamHomeAux.getTotalScoreHome() == null) {
                         dbTeamHomeAux.setTotalScoreHome(newGame.getScoreHome());
                     } else {
@@ -136,7 +137,7 @@ public class GameService {
                     teamRepository.save(dbTeamHomeAux);
                     newGame.setTeamHome(dbTeamHomeAux);
 
-                    Team dbTeamAwayAux = teamRepository.findById(newGame.getTeamAway().getId()).get();
+                    @NotNull Team dbTeamAwayAux = teamRepository.findById(newGame.getTeamAway().getId()).get();
                     if (dbTeamAwayAux.getTotalScoreAway() == null) {
                         dbTeamAwayAux.setTotalScoreAway(newGame.getScoreAway());
                     } else {
@@ -151,7 +152,7 @@ public class GameService {
                 .orElseGet(() -> {
                     newGame.setId(id);
 
-                    Team dbTeamHomeAux = teamRepository.findById(newGame.getTeamHome().getId()).get();
+                    @NotNull Team dbTeamHomeAux = teamRepository.findById(newGame.getTeamHome().getId()).get();
                     if (dbTeamHomeAux.getTotalScoreHome() == null) {
                         dbTeamHomeAux.setTotalScoreHome(newGame.getScoreHome());
                     } else {
@@ -161,7 +162,7 @@ public class GameService {
                     teamRepository.save(dbTeamHomeAux);
                     newGame.setTeamHome(dbTeamHomeAux);
 
-                    Team dbTeamAwayAux = teamRepository.findById(newGame.getTeamAway().getId()).get();
+                    @NotNull Team dbTeamAwayAux = teamRepository.findById(newGame.getTeamAway().getId()).get();
                     if (dbTeamAwayAux.getTotalScoreAway() == null) {
                         dbTeamAwayAux.setTotalScoreAway(newGame.getScoreAway());
                     } else {
