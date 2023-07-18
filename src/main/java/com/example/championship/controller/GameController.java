@@ -20,6 +20,11 @@ public class GameController {
         return gameService.getAllGames();
     }
 
+    @GetMapping(value = "/date/{date}")
+    public List<Game> findGamesByDate(@PathVariable(value = "date") Date date) {
+        return gameService.findGamesByDate(date);
+    }
+
     @GetMapping(value = "/gameType/{gameType}")
     public List<Game> findGamesByGameType(@PathVariable(value = "gameType") String gameType) {
         return gameService.findGamesByGameType(gameType);
@@ -30,9 +35,14 @@ public class GameController {
         return gameService.findGamesByLocation(location);
     }
 
-    @GetMapping(value = "/date/{date}")
-    public List<Game> findGamesByDate(@PathVariable(value = "date") Date date) {
-        return gameService.findGamesByDate(date);
+    @GetMapping(value = "/sort/date/asc")
+    public @NotNull List<Game> sortGamesByDateAsc() {
+        return gameService.sortGamesByDateAsc();
+    }
+
+    @GetMapping(value = "/sort/date/desc")
+    public @NotNull List<Game> sortGamesByDateDesc() {
+        return gameService.sortGamesByDateDesc();
     }
 
     @GetMapping(value = "/sort/gameType/asc")
@@ -53,16 +63,6 @@ public class GameController {
     @GetMapping(value = "/sort/location/desc")
     public @NotNull List<Game> sortGamesByLocationDesc() {
         return gameService.sortGamesByLocationDesc();
-    }
-
-    @GetMapping(value = "/sort/date/asc")
-    public @NotNull List<Game> sortGamesByDateAsc() {
-        return gameService.sortGamesByDateAsc();
-    }
-
-    @GetMapping(value = "/sort/date/desc")
-    public @NotNull List<Game> sortGamesByDateDesc() {
-        return gameService.sortGamesByDateDesc();
     }
 
     @PostMapping(value = "/new")

@@ -25,6 +25,10 @@ public class GameService {
         return gameRepository.findAll();
     }
 
+    public List<Game> findGamesByDate(Date date) {
+        return gameRepository.findAllByDate(date);
+    }
+
     public List<Game> findGamesByGameType(String gameType) {
         return gameRepository.findAllByGameType(gameType);
     }
@@ -33,8 +37,12 @@ public class GameService {
         return gameRepository.findAllByLocation(location);
     }
 
-    public List<Game> findGamesByDate(Date date) {
-        return gameRepository.findAllByDate(date);
+    public @NotNull List<Game> sortGamesByDateAsc() {
+        return gameRepository.findAll(Sort.by(Sort.Direction.ASC, "date"));
+    }
+
+    public @NotNull List<Game> sortGamesByDateDesc() {
+        return gameRepository.findAll(Sort.by(Sort.Direction.DESC, "date"));
     }
 
     public @NotNull List<Game> sortGamesByGameTypeAsc() {
@@ -51,14 +59,6 @@ public class GameService {
 
     public @NotNull List<Game> sortGamesByLocationDesc() {
         return gameRepository.findAll(Sort.by(Sort.Direction.DESC, "location"));
-    }
-
-    public @NotNull List<Game> sortGamesByDateAsc() {
-        return gameRepository.findAll(Sort.by(Sort.Direction.ASC, "date"));
-    }
-
-    public @NotNull List<Game> sortGamesByDateDesc() {
-        return gameRepository.findAll(Sort.by(Sort.Direction.DESC, "date"));
     }
 
     public @NotNull Game save(@NotNull Game newGame) {
@@ -119,8 +119,8 @@ public class GameService {
 
         return gameRepository.findById(id)
                 .map(game -> {
-                    game.setGameType(newGame.getGameType());
                     game.setDate(newGame.getDate());
+                    game.setGameType(newGame.getGameType());
                     game.setLocation(newGame.getLocation());
                     game.setScoreHome(newGame.getScoreHome());
                     game.setScoreAway(newGame.getScoreAway());

@@ -18,13 +18,13 @@ public class Game {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Column(name = "date")
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private Date date;
     @Column(name = "game_type")
     private String gameType;
     @Column(name = "location")
     private String location;
-    @Column(name = "date")
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    private Date date;
     @Column(name = "score_home")
     private int scoreHome;
     @Column(name = "score_away")

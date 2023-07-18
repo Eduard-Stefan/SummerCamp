@@ -5,7 +5,6 @@ $(document).ready(function() {
             "dataSrc": ""
         },
         "columns": [
-            { "data": "id" },
             { "data": "name" },
             { "data": "location" },
             { "data": "coach" },

@@ -9,9 +9,9 @@ import java.util.List;
 
 @Repository
 public interface GameRepository extends JpaRepository<Game, Integer> {
+    List<Game> findAllByDate(Date date);
+
     List<Game> findAllByGameType(String gameType);
 
     List<Game> findAllByLocation(String location);
-
-    List<Game> findAllByDate(Date date);
 }

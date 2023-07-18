@@ -5,10 +5,9 @@ $(document).ready(function() {
             "dataSrc": ""
         },
         "columns": [
-            { "data": "id" },
+            { "data": "date" },
             { "data": "gameType" },
             { "data": "location" },
-            { "data": "date" },
             { "data": "scoreHome" },
             { "data": "scoreAway" },
             { "data": "teamHome.name", "render": function(data, type, row) { return data ? data : ""; } },
@@ -63,9 +62,9 @@ $(document).ready(function() {
         var gameId = $(this).data('id');
         var gameData = dataTable.row($(this).closest('tr')).data();
         $('#editGameId').val(gameData.id);
+        $('#editDate').val(gameData.date);
         $('#editGameType').val(gameData.gameType);
         $('#editLocation').val(gameData.location);
-        $('#editDate').val(gameData.date);
         $('#editScoreHome').val(gameData.scoreHome);
         $('#editScoreAway').val(gameData.scoreAway);
         $('#editTeamHome').val(gameData.teamHome.id);
@@ -111,9 +110,9 @@ $(document).ready(function() {
             type: 'PUT',
             contentType: 'application/json',
             data: JSON.stringify({
+                date: $('#editDate').val(),
                 gameType: $('#editGameType').val(),
                 location: $('#editLocation').val(),
-                date: $('#editDate').val(),
                 scoreHome: scoreHome,
                 scoreAway: scoreAway,
                 teamHome: {
@@ -149,9 +148,9 @@ $(document).ready(function() {
     });
 
     function clearAddGameModal() {
+        $('#addDate').val('');
         $('#addGameType').val('');
         $('#addLocation').val('');
-        $('#addDate').val('');
         $('#addScoreHome').val('');
         $('#addScoreAway').val('');
         $('#addTeamHome').val('');
@@ -200,9 +199,9 @@ $(document).ready(function() {
             type: 'POST',
             contentType: 'application/json',
             data: JSON.stringify({
+                date: $('#addDate').val(),
                 gameType: $('#addGameType').val(),
                 location: $('#addLocation').val(),
-                date: $('#addDate').val(),
                 scoreHome: scoreHome,
                 scoreAway: scoreAway,
                 teamHome: {

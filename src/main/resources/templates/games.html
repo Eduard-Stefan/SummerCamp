@@ -17,10 +17,9 @@
             <table class="table table-striped table-bordered" id="example" style="width:100%">
                 <thead>
                 <tr>
-                    <th>ID</th>
+                    <th>DATE</th>
                     <th>TYPE</th>
                     <th>LOCATION</th>
-                    <th>DATE</th>
                     <th>SCORE HOME</th>
                     <th>SCORE AWAY</th>
                     <th>TEAM HOME</th>
@@ -47,16 +46,16 @@
             <div class="modal-body">
                 <form id="editForm">
                     <div class="mb-3">
+                        <label class="form-label" for="editDate">Date</label>
+                        <input class="form-control" id="editDate" name="date" required type="date">
+                    </div>
+                    <div class="mb-3">
                         <label class="form-label" for="editGameType">Type</label>
                         <input class="form-control" id="editGameType" name="gameType" required type="text">
                     </div>
                     <div class="mb-3">
                         <label class="form-label" for="editLocation">Location</label>
                         <input class="form-control" id="editLocation" name="location" required type="text">
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label" for="editDate">Date</label>
-                        <input class="form-control" id="editDate" name="date" required type="date">
                     </div>
                     <div class="mb-3">
                         <label class="form-label" for="editScoreHome">Score Home</label>
@@ -94,16 +93,16 @@
             <div class="modal-body">
                 <form id="addForm">
                     <div class="mb-3">
+                        <label class="form-label" for="addDate">Date</label>
+                        <input class="form-control" id="addDate" name="date" required type="date">
+                    </div>
+                    <div class="mb-3">
                         <label class="form-label" for="addGameType">Type</label>
                         <input class="form-control" id="addGameType" name="gameType" required type="text">
                     </div>
                     <div class="mb-3">
                         <label class="form-label" for="addLocation">Location</label>
                         <input class="form-control" id="addLocation" name="location" required type="text">
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label" for="addDate">Date</label>
-                        <input class="form-control" id="addDate" name="date" required type="date">
                     </div>
                     <div class="mb-3">
                         <label class="form-label" for="addScoreHome">Score Home</label>
