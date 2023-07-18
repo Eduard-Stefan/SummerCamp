@@ -1,20 +1,20 @@
 package com.example.championship.controller;
 
-import com.example.championship.service.GameService;
+import com.example.championship.service.PlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-public class ShowGamesViewer {
+public class PlayersViewer {
     @Autowired
-    private GameService gameService;
+    private PlayerService playerService;
 
-    @GetMapping("/games")
-    public ModelAndView games() {
-        ModelAndView mav = new ModelAndView("games");
-        mav.addObject("games", gameService.getAllGames());
+    @GetMapping("/players")
+    public ModelAndView players() {
+        ModelAndView mav = new ModelAndView("players");
+        mav.addObject("players", playerService.getAllPlayers());
         return mav;
     }
 }
