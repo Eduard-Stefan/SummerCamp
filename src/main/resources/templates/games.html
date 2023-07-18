@@ -84,6 +84,52 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addModalLabel">Add Game</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="addForm">
+                    <div class="mb-3">
+                        <label for="addGameType" class="form-label">Type</label>
+                        <input type="text" class="form-control" id="addGameType" name="gameType" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="addLocation" class="form-label">Location</label>
+                        <input type="text" class="form-control" id="addLocation" name="location" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="addDate" class="form-label">Date</label>
+                        <input type="date" class="form-control" id="addDate" name="date" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="addScoreHome" class="form-label">Score Home</label>
+                        <input type="number" class="form-control" id="addScoreHome" name="scoreHome" min="0" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="addScoreAway" class="form-label">Score Away</label>
+                        <input type="number" class="form-control" id="addScoreAway" name="scoreAway" min="0" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="addTeamHome" class="form-label">Team Home</label>
+                        <select class="form-select" id="addTeamHome" name="teamHome" required></select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="addTeamAway" class="form-label">Team Away</label>
+                        <select class="form-select" id="addTeamAway" name="teamAway" required></select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" id="saveGameBtn">Save Game</button>
+            </div>
+        </div>
+    </div>
+</div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap5.min.js"></script>

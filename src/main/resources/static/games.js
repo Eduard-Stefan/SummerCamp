@@ -34,13 +34,24 @@ $(document).ready(function() {
         success: function(teams) {
             var editTeamHomeDropdown = $('#editTeamHome');
             var editTeamAwayDropdown = $('#editTeamAway');
+            var addTeamHomeDropdown = $('#addTeamHome');
+            var addTeamAwayDropdown = $('#addTeamAway');
+
             editTeamHomeDropdown.empty();
             editTeamAwayDropdown.empty();
+            addTeamHomeDropdown.empty();
+            addTeamAwayDropdown.empty();
+
             editTeamHomeDropdown.append('<option value="">Select a team</option>');
             editTeamAwayDropdown.append('<option value="">Select a team</option>');
+            addTeamHomeDropdown.append('<option value="">Select a team</option>');
+            addTeamAwayDropdown.append('<option value="">Select a team</option>');
+
             teams.forEach(function(team) {
                 editTeamHomeDropdown.append('<option value="' + team.id + '">' + team.name + '</option>');
                 editTeamAwayDropdown.append('<option value="' + team.id + '">' + team.name + '</option>');
+                addTeamHomeDropdown.append('<option value="' + team.id + '">' + team.name + '</option>');
+                addTeamAwayDropdown.append('<option value="' + team.id + '">' + team.name + '</option>');
             });
         },
         error: function() {
@@ -137,11 +148,82 @@ $(document).ready(function() {
         });
     });
 
+    function clearAddGameModal() {
+        $('#addGameType').val('');
+        $('#addLocation').val('');
+        $('#addDate').val('');
+        $('#addScoreHome').val('');
+        $('#addScoreAway').val('');
+        $('#addTeamHome').val('');
+        $('#addTeamAway').val('');
+        $('#addForm')[0].reset();
+    }
+
     $('#addGameButton').on('click', function() {
-        window.location.href = "add-game";
+        clearAddGameModal();
+        $('#addModal').modal('show');
+    });
+
+    $('#saveGameBtn').on('click', function() {
+        var addForm = $('#addForm');
+
+        if (!addForm[0].checkValidity()) {
+            addForm[0].reportValidity();
+            return;
+        }
+
+        var scoreHome = parseInt($('#addScoreHome').val(), 10);
+        var scoreAway = parseInt($('#addScoreAway').val(), 10);
+
+        if (scoreHome < 0) {
+            $('#addScoreHome')[0].setCustomValidity('Score Home must be a positive number or zero.');
+            $('#addScoreHome')[0].reportValidity();
+            return;
+        }
+
+        if (scoreAway < 0) {
+            $('#addScoreAway')[0].setCustomValidity('Score Away must be a positive number or zero.');
+            $('#addScoreAway')[0].reportValidity();
+            return;
+        }
+
+        var addTeamHomeValue = $('#addTeamHome').val();
+        var addTeamAwayValue = $('#addTeamAway').val();
+
+        if (addTeamHomeValue === addTeamAwayValue) {
+            alert('Team Home and Team Away must be different.');
+            return;
+        }
+
+        $.ajax({
+            url: "http://localhost:8080/games/new",
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({
+                gameType: $('#addGameType').val(),
+                location: $('#addLocation').val(),
+                date: $('#addDate').val(),
+                scoreHome: scoreHome,
+                scoreAway: scoreAway,
+                teamHome: {
+                    id: addTeamHomeValue
+                },
+                teamAway: {
+                    id: addTeamAwayValue
+                }
+            }),
+            success: function() {
+                $('#addModal').modal('hide');
+                dataTable.ajax.reload();
+            },
+            error: function() {
+                alert('Error adding the game.');
+            }
+        });
     });
 
     $('#homeButton').on('click', function() {
         window.location.href = "home";
     });
+
 });
