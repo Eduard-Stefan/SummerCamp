@@ -81,6 +81,13 @@ $(document).ready(function() {
         });
     });
 
+    function clearAddTeamModal() {
+        $('#addName').val('');
+        $('#addLocation').val('');
+        $('#addCoach').val('');
+        $('#addForm')[0].reset();
+    }
+
     $('#addTeamButton').on('click', function() {
         clearAddTeamModal();
         $('#addModal').modal('show');
@@ -116,11 +123,4 @@ $(document).ready(function() {
     $('#homeButton').on('click', function() {
         window.location.href = "home";
     });
-
-    function clearAddTeamModal() {
-        $('#addName').val('');
-        $('#addLocation').val('');
-        $('#addCoach').val('');
-        $('#addForm')[0].reset();
-    }
 });

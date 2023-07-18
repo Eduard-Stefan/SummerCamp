@@ -30,10 +30,17 @@ $(document).ready(function() {
         method: "GET",
         success: function(teams) {
             var editTeamDropdown = $('#editTeam');
+            var addTeamDropdown = $('#addTeam');
+
             editTeamDropdown.empty();
+            addTeamDropdown.empty();
+
             editTeamDropdown.append('<option value="">Select a team</option>');
+            addTeamDropdown.append('<option value="">Select a team</option>');
+
             teams.forEach(function(team) {
                 editTeamDropdown.append('<option value="' + team.id + '">' + team.name + '</option>');
+                addTeamDropdown.append('<option value="' + team.id + '">' + team.name + '</option>');
             });
         },
         error: function() {
@@ -107,8 +114,55 @@ $(document).ready(function() {
         });
     });
 
+    function clearAddPlayerModal() {
+            $('#addName').val('');
+            $('#addAge').val('');
+            $('#addNationality').val('');
+            $('#addTeam').val('');
+            $('#addForm')[0].reset();
+    }
+
     $('#addPlayerButton').on('click', function() {
-        window.location.href = "add-player";
+        clearAddPlayerModal();
+        $('#addModal').modal('show');
+    });
+
+    $('#savePlayerBtn').on('click', function() {
+        var addForm = $('#addForm');
+
+        if (!addForm[0].checkValidity()) {
+            addForm[0].reportValidity();
+            return;
+        }
+
+        var age = parseInt($('#addAge').val(), 10);
+
+        if (age < 1) {
+            $('#addAge')[0].setCustomValidity('Age must be greater than or equal to 1.');
+            $('#addAge')[0].reportValidity();
+            return;
+        }
+
+        $.ajax({
+            url: "http://localhost:8080/players/new",
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({
+                name: $('#addName').val(),
+                age: age,
+                nationality: $('#addNationality').val(),
+                team: {
+                    id: $('#addTeam').val()
+                }
+            }),
+            success: function() {
+                $('#addModal').modal('hide');
+                dataTable.ajax.reload();
+            },
+            error: function() {
+                alert('Error adding the player.');
+            }
+        });
     });
 
     $('#homeButton').on('click', function() {
