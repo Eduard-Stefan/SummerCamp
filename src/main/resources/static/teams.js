@@ -58,6 +58,8 @@ $(document).ready(function() {
             success: function() {
                 $('#editModal').modal('hide');
                 dataTable.ajax.reload();
+                var editToast = new bootstrap.Toast($('#editToast'));
+                editToast.show();
             },
             error: function() {
                 alert('Error updating the team.');
@@ -73,6 +75,8 @@ $(document).ready(function() {
             type: 'DELETE',
             success: function() {
                 dataTable.ajax.reload();
+                var deleteToast = new bootstrap.Toast($('#deleteToast'));
+                deleteToast.show();
             },
             error: function() {
                 alert('Error deleting the team.');
@@ -112,6 +116,8 @@ $(document).ready(function() {
             success: function() {
                 $('#addModal').modal('hide');
                 dataTable.ajax.reload();
+                var addToast = new bootstrap.Toast($('#addToast'));
+                addToast.show();
             },
             error: function() {
                 alert('Error adding the team.');
