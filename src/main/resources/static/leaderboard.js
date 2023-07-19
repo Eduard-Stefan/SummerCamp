@@ -5,9 +5,9 @@ $(document).ready(function() {
             "dataSrc": ""
         },
         "columns": [
-            { "data": "totalScore" },
-            { "data": "name" }
+            { "data": "name" },
+            { "data": "totalScore" }
         ],
-        "order": [[0, "desc"]]
+        "order": [[1, "desc"]]
     });
 });
