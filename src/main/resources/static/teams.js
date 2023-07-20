@@ -69,6 +69,12 @@ $(document).ready(function() {
 
     $('#example').on('click', '.deleteButton', function() {
         var teamId = $(this).data('id');
+        $('#confirmDeleteButton').data('team-id', teamId);
+        $('#confirmDeleteModal').modal('show');
+    });
+
+    $('#confirmDeleteButton').on('click', function() {
+        var teamId = $(this).data('team-id');
         var deleteUrl = "http://localhost:8080/teams/delete/" + teamId;
         $.ajax({
             url: deleteUrl,
@@ -82,6 +88,8 @@ $(document).ready(function() {
                 alert('Error deleting the team.');
             }
         });
+
+        $('#confirmDeleteModal').modal('hide');
     });
 
     function clearAddTeamModal() {

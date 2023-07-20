@@ -102,6 +102,12 @@ $(document).ready(function() {
 
     $('#example').on('click', '.deleteButton', function() {
         var playerId = $(this).data('id');
+        $('#confirmDeleteButton').data('player-id', playerId);
+        $('#confirmDeleteModal').modal('show');
+    });
+
+    $('#confirmDeleteButton').on('click', function() {
+        var playerId = $(this).data('player-id');
         var deleteUrl = "http://localhost:8080/players/delete/" + playerId;
         $.ajax({
             url: deleteUrl,
@@ -115,6 +121,8 @@ $(document).ready(function() {
                 alert('Error deleting the player.');
             }
         });
+
+        $('#confirmDeleteModal').modal('hide');
     });
 
     function clearAddPlayerModal() {

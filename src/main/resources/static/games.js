@@ -136,6 +136,12 @@ $(document).ready(function() {
 
     $('#example').on('click', '.deleteButton', function() {
         var gameId = $(this).data('id');
+        $('#confirmDeleteButton').data('game-id', gameId);
+        $('#confirmDeleteModal').modal('show');
+    });
+
+    $('#confirmDeleteButton').on('click', function() {
+        var gameId = $(this).data('game-id');
         var deleteUrl = "http://localhost:8080/games/delete/" + gameId;
         $.ajax({
             url: deleteUrl,
@@ -149,6 +155,8 @@ $(document).ready(function() {
                 alert('Error deleting the game.');
             }
         });
+
+        $('#confirmDeleteModal').modal('hide');
     });
 
     function clearAddGameModal() {
